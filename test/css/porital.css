@@ -1,0 +1,67 @@
+.btn-header {
+  display: block;
+  border: none;
+  background: url(../img/sprites.png) no-repeat -211px -48px;
+  -webkit-background-size: 320px auto;
+  background-size: 320px auto;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 3px;
+}
+.special-info {
+  margin: 9px 0;
+  background-color: #e6e6e6;
+}
+.mod-recommend-container small {
+  color: #7F7F7F;
+}
+.w-box {
+  display: -webkit-box;
+  transform: translate(0px);
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.mod-software-list .box-inner {
+  width: 64px;
+}
+.ns-recent-play .mod-software-list li {
+  width: 64px;
+  float: none;
+  margin-right: 20px;
+}
+.btn-more {
+  margin-top: -8px;
+}
+.mod-recommend-container {
+  margin: 0 0 8px 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+.mod-recommend-container h2 {
+  padding-left: 20px;
+}
+.icon-frame img,
+.icon-frame {
+  width: 60px;
+  height: 60px;
+}
+.mod-recommend-list li {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.btn-more {
+  margin: 0 20px;
+}
+.btn-more.down:after {
+  -webkit-transform: rotate(180deg);
+  top: 0;
+  left: 4px;
+}
+.mod-recommend-container small {
+  font-size: 10px;
+  margin-top: -2px;
+}
+.mod-recommend-list li {
+  border: none;
+}

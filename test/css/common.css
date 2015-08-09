@@ -1,0 +1,271 @@
+/*common*/
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  overflow: hidden;
+}
+.hidden {
+  display: none;
+}
+.hidden-abs {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  z-index: -9999;
+  opacity: 0;
+}
+.c-tx1 {
+  color: #afafaf;
+}
+.c-tx2 {
+  color: #f7a100;
+}
+.c-tx3 {
+  color: #646464;
+}
+.c-tx4 {
+  color: #e95330;
+}
+li:active,
+li a:active,
+img:active,
+.btn-more:active,
+.mod-search-container button:active,
+btn-arrow-down:active {
+  -webkit-tap-highlight-color: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.logo {
+  width: 75px;
+  height: 75px;
+}
+/*ranking
+-------------------------------------------------------------*/
+.wrapper {
+  position: relative;
+}
+.wrapper.full-screen {
+  height: 100%;
+}
+.mod-header {
+  border-bottom: 1px solid #d58b00;
+  box-sizing: border-box;
+  background: #f7a100;
+  line-height: 47px;
+  text-align: center;
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 5;
+}
+.mod-header h1 {
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+}
+.mod-header .btn-me {
+  left: 5px;
+  line-height: 48px;
+}
+.mod-header .btn-me.after-login {
+  background: none;
+}
+.mod-header .btn-me img {
+  display: inline;
+  margin-left: 1px;
+  width: 24px;
+  height: 24px;
+  -webkit-border-radius: 100%;
+}
+.mod-content {
+  position: relative;
+}
+.mod-content.with-fixed-header {
+  padding-top: 48px;
+}
+/*btn*/
+.btn-search,
+.btn-me {
+  display: block;
+  border: none;
+  background: url(../img/sprites.png) no-repeat -211px -51px;
+  -webkit-background-size: 320px auto;
+  background-size: 320px auto;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  position: absolute;
+  top: 6px;
+  right: 5px;
+}
+.btn-me .ico-red-dot {
+  position: absolute;
+  right: -3px;
+  top: 8px;
+}
+.btn-me.txt {
+  top: 5px;
+  right: 10px;
+  background: none;
+  color: #fff;
+  font-size: 16px;
+}
+.btn-me.active {
+  height: 24px;
+  width: 24px;
+  left: 16px;
+  top: 12px;
+}
+.btn-search {
+  right: 0;
+  background-position: -82px -70px;
+}
+.btn-common-s,
+.btn-gray-s,
+.btn-green-s {
+  display: block;
+  height: 28px;
+  box-sizing: border-box;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 26px;
+}
+.btn-common-s.disabled,
+.btn-gray-s.disabled,
+.btn-green-s.disabled {
+  color: #cecece;
+  border-color: #cecece;
+}
+.btn-common-s,
+.btn-green-s {
+  border: 1px solid #f7a100;
+  color: #f7a100;
+  min-width: 50px;
+}
+.btn-common-s:active {
+  background: #f7a100;
+  color: #fff;
+}
+.btn-gray-s {
+  border: 1px solid #cecece;
+  color: #cecece!important;
+}
+.btn-green-s {
+  border: 1px solid #6ec817;
+  color: #6ec817!important;
+}
+.btn-yellow-pure {
+  display: inline-block;
+  background: #f7a100;
+  -webkit-border-radius: 2px;
+  border-radius: 5px;
+  line-height: 32px;
+  text-align: center;
+  color: #fff!important;
+}
+.btn-yellow-pure:active {
+  background: #f9bd4d;
+  color: #fff;
+}
+.btn-gray-pure {
+  background: #cecece;
+  color: #fff!important;
+}
+.btn-gray-pure:active {
+  background: #cecece;
+  color: #fff!important;
+}
+.btn-more {
+  display: block;
+  position: relative;
+  margin: 0 18px;
+  border-top: 1px solid #eaeaea;
+  box-sizing: border-box;
+  -webkit-border-radius: 0 0 4px 4px;
+  border-radius: 0 0 4px 4px;
+  line-height: 35px;
+  height: 35px;
+  text-align: center;
+  color: #1e1e1e!important;
+}
+.btn-more:active {
+  color: #1e1e1e;
+}
+.btn-more:after {
+  content: "";
+  display: inline-block;
+  background: url(../img/sprites.png) no-repeat -160px 0;
+  -webkit-background-size: 320px auto;
+  background-size: 320px auto;
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  width: 13px;
+  height: 13px;
+  position: relative;
+  top: 1px;
+  left: 2px;
+}
+.btn-blue-s {
+  display: block;
+  width: 50px;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3397f3), color-stop(100%, #0f60ea));
+  border: 1px solid #669cc6;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  height: 22px;
+  line-height: 22px;
+  font-size: 13px;
+  text-align: center;
+  color: #fff!important;
+}
+.btn-close {
+  display: block;
+  background: url(../img/sprites.png) no-repeat -102px -39px;
+  -webkit-background-size: 320px auto;
+  background-size: 320px auto;
+  width: 23px;
+  height: 23px;
+  text-indent: -9999px;
+}
+/*ico*/
+.ico-red-dot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  border: 1px solid #fff;
+  background: #e95330;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+.mod-sub-nav {
+  border: 1px solid #f7a100;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  margin: 9px 72px;
+}
+.mod-sub-nav a {
+  float: left;
+  display: block;
+  width: 50%;
+  height: 30px;
+  color: #f7a100;
+  text-align: center;
+  line-height: 30px;
+}
+.mod-sub-nav a.active {
+  background: #f7a100;
+  color: #fff;
+}

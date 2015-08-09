@@ -1,0 +1,272 @@
+/*dialog
+--------------------------------------------------------------*/
+.mod-mask {
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  position: fixed;
+}
+.mod-mask.op-1 {
+  background: #000;
+}
+.mod-dialog {
+  width: 300px;
+  background: #fff;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-left: -150px;
+  margin-top: -150px;
+  z-index: 1000;
+}
+.mod-dialog-header {
+  padding: 15px 10px 10px 10px;
+  font-size: 20px;
+  text-align: center;
+}
+.mod-dialog-content {
+  padding: 0 20px;
+  text-align: center;
+  font-size: 15px;
+}
+.mod-dialog-footer a {
+  display: block;
+  border-top: 1px solid #e4e4e4;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  font-size: 20px;
+}
+.mod-dialog-footer a:active {
+  background: #f2f2f2;
+}
+.dialog-btn-common {
+  color: #248bf2!important;
+}
+.dialog-btn-disable {
+  color: #1e1e1e!important;
+}
+.dialog-btn-black {
+  color: #1e1e1e!important;
+}
+.dialog-btn-blue {
+  color: #248bf2!important;
+}
+.dialog-btn-gray {
+  color: #cecece!important;
+}
+.two-btn {
+  display: -webkit-box;
+}
+.two-btn a {
+  width: 50%;
+}
+.two-btn > a:first-child {
+  border-right: 1px solid #e4e4e4;
+  box-sizing: border-box;
+}
+/*custom*/
+.dialog-lettory {
+  width: 300px;
+  background: #ffc100;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  margin-left: -150px;
+  z-index: 1000;
+}
+.dialog-lettory .mod-dialog-header {
+  padding: 0 0 15px 0;
+  background: url(../img/bg-winning.png) no-repeat 0 15px, -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fdd72e), color-stop(50%, #ffc200));
+  -webkit-background-size: 320px auto;
+  background-size: 320px auto;
+  width: 300px;
+  height: 175px;
+  position: relative;
+}
+.dialog-lettory .btn-close {
+  background-position: -105px -40px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 6px;
+  right: 5px;
+}
+.dialog-lettory .mod-dialog-footer {
+  padding-bottom: 15px;
+  text-align: right;
+}
+.dialog-lettory .mod-dialog-footer input[type=checkbox] {
+  position: relative;
+  top: 2px;
+}
+.dialog-lettory label {
+  margin: 0 10px 0 5px;
+}
+.dialog-btn-red {
+  display: block;
+  margin: 15px auto 35px;
+  background: #d84e2e;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  width: 230px;
+  height: 46px;
+  line-height: 46px;
+  text-align: center;
+  font-size: 20px;
+  color: #fff!important;
+  font-weight: bold;
+}
+.dialog-lettory {
+  top: 50%;
+  margin-top: -142px;
+}
+.dialog-login-gift .mod-dialog-header {
+  padding: 40px 20px;
+}
+.dialog-account-switching .mod-dialog-header,
+.dialog-got-success .mod-dialog-header {
+  padding-top: 25px;
+}
+.dialog-account-switching .mod-dialog-content,
+.dialog-got-success .mod-dialog-content {
+  padding-bottom: 25px;
+}
+.mod-select-list {
+  width: 260px;
+  -webkit-appearance: button;
+  padding: 8px 30px 8px 5px;
+  border: none;
+  box-sizing: border-box;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  color: #646464;
+  background: #f5f5f5;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.dialog-select .dialog-txt {
+  padding: 18px 0;
+  font-size: 15px;
+  text-align: left;
+}
+.dialog-select .dialog-txt span {
+  font-size: 11px;
+  color: #646464;
+}
+.dialog-select .btn-txt-gray {
+  color: #c3c3c3;
+}
+.mod-select-container {
+  margin: 0 0 20px 0;
+  width: 260px;
+  height: 40px;
+  position: relative;
+}
+.mod-select-container:after {
+  content: "";
+  display: block;
+  background: url(../img/sprites.png) no-repeat -200px 0;
+  -webkit-background-size: 320px auto;
+  background-size: 320px auto;
+  width: 13px;
+  height: 7px;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  margin-top: -4px;
+}
+.mod-tips {
+  max-width: 200px;
+  background: #323232;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  padding: 8px 20px;
+  color: #fff;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  z-index: 1000;
+}
+.tips-success-receive {
+  margin-left: -55px;
+}
+.mod-dialog.relative {
+  width: 100%;
+  min-height: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.5);
+}
+.mod-dialog.relative .inner-box {
+  position: relative;
+  width: 300px;
+  margin: 0 auto;
+  background: #fff;
+  -webkit-border-radius: 3px;
+  overflow: hidden;
+}
+.mod-dialog h2 {
+  font-size: 20px;
+  color: #1e1e1e;
+  height: 60px;
+  line-height: 60px;
+}
+.mod-dialog .mod-input-container {
+  height: 40px;
+  line-height: 40px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: #1e1e1e;
+  background: #f5f5f5;
+}
+.mod-dialog .mod-input-container:last-child {
+  margin-bottom: -12px;
+}
+.mod-dialog .mod-input-container input {
+  background: none;
+  border: none;
+  width: 100%;
+  height: 100%;
+  text-indent: 1em;
+}
+.mod-dialog .mod-input-container input::-webkit-input-placeholder {
+  color: #646464;
+}
+.mod-dialog .select-list {
+  margin: 0 -20px;
+  text-align: left;
+}
+.mod-dialog .select-list h2,
+.mod-dialog .select-list li {
+  font-size: 16px;
+  padding: 0 16px;
+  height: 40px;
+  line-height: 40px;
+}
+.mod-dialog .select-list h2.on,
+.mod-dialog .select-list li.on {
+  background: #f5f5f5;
+}
+.mod-dialog .select-list h2.on:after,
+.mod-dialog .select-list li.on:after {
+  font-family: 'icon';
+  content: 'O';
+  color: #4c9afa;
+  float: right;
+  font-size: 30px;
+}

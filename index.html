@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML文件样式回归测试工具v1.0</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+</head>
+<body>
+<div class="warp">
+    <input type="file" id="uploadCss" class="hidden"/>
+    <script>
+        document.write('<input id="filePathDialog" type="file" nwdirectory nwworkingdir="'+ process.cwd() +'" class="hidden">')
+    </script>
+    <div id="alert" class="alert ">提示：请先选择html文件目录，默认当前软件所在目录</div>
+    <div class="item file-path input-append">
+        <p><i class="icon-folder-open"></i> html文件目录：
+        <script>document.write('<input id="dest" type="text" class="path span4" value="'+ process.cwd() +'" style="width: 487px;">')</script>
+        </p>
+    </div>
+    <div id="dragUpload" class="item upload-area">
+        <div class="label-area"><i class="icon-plus"></i>将HTML文件目录拖拽到此区域，或者点击按钮选择</div>
+        <label class="btn " for="filePathDialog"><i class="icon-upload"></i> 选择目录 </label>
+        <p style="display:none">释放鼠标选中文件</p>
+    </div>
+    <div class="item log">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <td></td>
+                <td width="30" align="center"></td>
+            </tr>
+            </thead>
+            <tbody id="outPutMsg" style="  -webkit-user-select: initial;">
+
+            </tbody>
+        </table>
+        <!--
+        <textarea name="base64code" id="outPutMsg" cols="30" rows="10" placeholder="log"></textarea>
+        -->
+    </div>
+
+    <div class="item control-group">
+        <div class="controls">
+            <div class="input-append">
+                <select name="htmlVersion" id="htmlVersion">
+                    <option value="0">请选择要比对的版本</option>
+                </select>
+                <button class="btn" id="createVersion">生成版本</button>
+                <button class="btn" id="delVersion">删除版本</button>
+                <button class="btn" id="startTest">回归测试</button>
+                <label class="btn" for="uploadCss">检查无用CSS</label>
+            </div>
+        </div>
+    <div class="progress" id="progress" style="display: none;">
+        <div class="bar" style="width: 0;"></div>
+    </div>
+    <iframe src="" frameborder="0" id="iframe" class="hidden"></iframe>
+    <script id="msgTepl" type="text/html">
+        <% for (var i = 0; i < msg.length; i ++) { %>
+        <tr class="<%if( (msg[i].type) === 1 ) {%> error <%}%>">
+            <td><%=msg[i].txt%></td>
+            <td>
+                <%if( (msg[i].type) === 0 ) {%>
+                    <i class="icon-ok"></i>
+                    <%} else if( (msg[i].type) === 1 ) {%>
+                        <a href="javascript:" onclick="showLog('<%=msg[i].id%>')"><i class=" icon-flag"></i> 查看详情</a>
+                <%}%>
+            </td>
+        </tr>
+        <% } %>
+    </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,492 @@
+@charset "utf-8";
+body,
+h1,
+h2,
+form,
+fieldset,
+label,
+input,
+p {
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+  font-family: 微软雅黑, Helvetica;
+}
+body {
+  background: #e6e6e6;
+  min-height: 480px;
+  font-family: 微软雅黑, Helvetica;
+}
+.qq_label,
+.pwd_label {
+  display: none;
+}
+.login {
+  margin: 0 auto;
+  width: 320px;
+}
+h1 {
+  background: url(../img/logo-login.png) no-repeat center top;
+  background-size: 64px auto;
+  height: 66px;
+  margin: 22px auto 44px;
+  text-indent: -99em;
+  width: 64px;
+}
+#log_from {
+  margin: 0 auto;
+  width: 212px;
+}
+.qqpwd_set {
+  margin-bottom: 22px;
+  background: none fixed;
+  overflow: hidden;
+  border: none;
+  padding: 0;
+  border: 1px solid #cdcdcd;
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+input::-webkit-input-placeholder {
+  color: #cdcdcd;
+}
+.qqpwd_set input[type="text"],
+input[type="password"],
+.lb_lg_btn {
+  color: #333;
+  font-size: 15px;
+  height: 17px;
+  padding: 13px 10px;
+  position: relative;
+  width: 192px;
+  border: none;
+}
+.qqpwd_set input[type="text"] {
+  border-bottom: 1px solid #cdcdcd;
+}
+.qqpwd_set p {
+  position: relative;
+}
+#loginBox p .pt_inp_empty {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: url(http://3gimg.qq.com/ptlogin/touch/img/common/close2.png) no-repeat center center;
+  text-indent: -999em;
+  position: absolute;
+  top: 50%;
+  margin-top: -10px;
+  right: 5px;
+}
+.lb_lg_btn {
+  background: #388be5;
+  color: #fff;
+  height: 44px;
+  width: 213px;
+  letter-spacing: 5px;
+}
+a {
+  color: #388be5;
+  text-decoration: none;
+}
+#hbar_wb_reg {
+  display: none;
+}
+.loading_box {
+  border-radius: 8px 8px 8px 8px;
+  height: 320px;
+  position: absolute;
+  text-align: center;
+  width: 480px;
+  z-index: 2000;
+}
+.lbox_l_btn {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAMAAACf4xmcAAAAeFBMVEUAAACysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrIvLHOlAAAAKHRSTlMAAhYFKCNIPDQNvi0JaWMe5J+MXFUa8dzNta2VgkLrx6ZO99V6cP11/P5hmAAAAadJREFUOMuNklmSozAQREu7EJsFFjtmh/vfcITH04HdIM/7IQIemSoKeINGtZput1zpkMIFQaTym+VhybKsW7wTCaVFnv/Tsp3xFpJPi1WTtaY69TEhWEb6kY3j2LF3q+2maVL34HiEaRzXBz9aQ1FMRfRRQbZsXcc7/CCKoigZ/MLPrTfAi1gVRY/hBFysq3mVIN11lQenmNyYV8C96xSDC4gx8TMiKLsuhUu8ODZoD1OqJ9caMvEzTivFAVxxzAAwpUri0lDMGIF7qWZwghnzYC5L7tY8xjDUZUndWkBpDH1Zem6NUMqgqirk1hCl9H8036egq+pb6a4lfc++jLBrS9+3bg1LGQPv+9CtMSkxxFrX7mVJKQOARmvxpdO3F651g1xhQuB9kKSuHUPEQshnSlvXibncuxDC/I2d63q++MREtK0Ne4KTJFmCc4u34ueJb70NnzS2nLeH+zJJmkagzz+DW97e9htL6JNDH+PDMPCPDhw2zTwvg48DhAJMxd0yiF8nRmKb521bljAMoyhNU2sxdDaWjI4ap+R6fzyNwigdWurBkT8r2h456114dwAAAABJRU5ErkJggg==) no-repeat;
+  -webkit-background-size: 19px auto;
+  background-size: 19px auto;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  top: 4px;
+  -webkit-animation: loading 1s linear infinite;
+  border: none;
+  text-indent: -9999px;
+  z-index: 2000;
+}
+@-webkit-keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+.msg_box {
+  position: absolute;
+  z-index: 2000;
+  width: 262px;
+  height: 119px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 60px;
+  -webkit-border-radius: 2px;
+  border-radius: 8px;
+  background: -moz-linear-gradient(top, #5cbce9 0%, #166694 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #549fd8), color-stop(100%, #549fd8));
+  -moz-box-shadow: 0px 2px 5px rgba(57, 84, 106, 0.28) inset;
+  -webkit-box-shadow: 0px 2px 5px rgba(57, 84, 106, 0.28) inset;
+  box-shadow: 0px 2px 5px rgba(57, 84, 106, 0.28) inset;
+  border: 1px solid #318aad;
+  -moz-border-radius: 2px;
+}
+.mbox_txt {
+  margin: 15px 0 0 19px;
+  vertical-align: center;
+  width: 230px;
+  color: white;
+}
+.mbox_cz_btn {
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(20%, #7cc130), color-stop(80%, #61a419));
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  text-shadow: 1px 1px 0 #336200;
+  height: 37px;
+  line-height: 15px;
+  letter-spacing: 10px;
+  width: 238px;
+  border: 1px solid #4C89B8;
+  -webkit-border-radius: 5px;
+  -webkit-box-shadow: 0 0 2px #ccc inset;
+  position: absolute;
+  bottom: 10px;
+  left: 11px;
+}
+/*.verify_box {
+	height: 169px;
+	margin-top: -34px;
+	position: absolute;
+	z-index: 2000;
+	text-align: center;
+	width: 272px;
+	background-color: #DEE0E6;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-style: solid;
+	border-bottom-width: 4px;
+	border-image: initial;
+	border-left-color: #414243;
+	border-left-style: solid;
+	border-left-width: 4px;
+	border-right-color: #414243;
+	border-right-style: solid;
+	border-right-width: 4px;
+	border-top-color: #414243;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-top-style: solid;
+	border-top-width: 4px;
+	margin-bottom: 0;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0;
+	border-bottom-color: #414243;
+}*/
+/*.vbox_txt {
+	background-attachment: initial, initial;
+	background-clip: initial, initial;
+	background-color: initial;
+	background-image: url(http://3gimg.qq.com/ptlogin/touch/img/weibo/dialog_h_bg.png),
+		-webkit-gradient(linear, 0 0%, 0 100%, from(#5CABEB), to(#2788D4) );
+	background-origin: initial, initial;
+	background-repeat: no-repeat;
+	height: 50px;
+	line-height: 50px;
+	padding-bottom: 0;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 0;
+	position: relative;
+	color: #FFFFFF;
+	font-size: 16px;
+	font-weight: bold;
+}*/
+.vbox_img {
+  z-index: 3000;
+  height: 42px;
+  margin: 0 auto;
+  position: absolute;
+  left: 6%;
+  margin-right: 10px;
+  bottom: 80px;
+  width: 100px;
+  margin-right: 12px;
+}
+.vbox_img img {
+  border: none;
+  width: 100px;
+  height: 42px;
+}
+.vbox_code_inp {
+  border-radius: 4px;
+  color: #333333;
+  font-size: 15px;
+  float: left;
+  font-size: 14px;
+  height: 42px;
+  padding-left: 4px;
+  border: 1px solid #B2B9CC;
+  position: absolute;
+  right: 6%;
+  margin-left: 12px;
+  bottom: 80px;
+  width: 90px;
+  padding-left: 15px;
+}
+.vbox_cz_btn {
+  width: 105px;
+  height: 47px;
+  cursor: pointer;
+  position: absolute;
+  left: 5%;
+  bottom: 10px;
+  background: #eee;
+  color: #333;
+  line-height: 15px;
+  font-size: 18px;
+  text-align: center;
+  border: none;
+}
+.vbox_lg_btn {
+  cursor: pointer;
+  width: 105px;
+  position: absolute;
+  right: 5%;
+  bottom: 10px;
+  background: #388be5;
+  color: #fff;
+  margin-right: 3px;
+  font-size: 15px;
+  height: 47px;
+  line-height: 15px;
+  text-indent: 12px;
+  border: none;
+}
+#hbar_reg {
+  display: none;
+}
+.help_bar {
+  display: none;
+  margin-top: 22px;
+  word-spacing: 110px;
+  text-align: right;
+}
+.bg_shadow {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 1500;
+  top: 0;
+  left: 0;
+  background: #2F2F2F;
+  opacity: 0.6;
+}
+div#qk_login {
+  width: auto!important;
+}
+.qkbox,
+.pvbox,
+.verify_box {
+  width: 250px;
+  margin: 0 auto;
+  padding: 20px 0 0 0;
+  border-radius: 2px;
+  background: #fff;
+  color: #8d8d8d;
+  font-size: 13px;
+  position: relative;
+  z-index: 2000;
+}
+.qkbox h2,
+.pvbox h2,
+.vbox_txt {
+  font-size: 20px;
+  color: #1e1e1e;
+  text-align: center;
+}
+.vbox_txt {
+  padding-bottom: 15px;
+  border-bottom: 1px solid #dedede;
+  font-size: 16px;
+}
+#qkbox-bar {
+  padding: 0 15px 20px 15px;
+}
+#qkbox-cmode-return {
+  display: none;
+}
+.pvbox .bar {
+  border-top: 1px solid #eaeaeb;
+}
+.pvbox .bar input {
+  display: inline-block;
+  width: 50%;
+  border: none;
+  background: none;
+  line-height: 46px;
+  color: #1e1e1e;
+  font-size: 20px;
+}
+.pvbox .bar input:first-child {
+  border-right: 1px solid #eaeaeb;
+}
+.pvbox .bar .submit {
+  color: #248bf2;
+}
+.qkbox .msg {
+  font-size: 12px;
+  color: #8d8d8d;
+  text-align: center;
+}
+.qkbox .userlist {
+  text-align: center;
+  overflow: hidden;
+  padding: 20px 0 12px 0;
+}
+.qkbox .entry {
+  display: inline-block;
+  width: 62px;
+  height: 80px;
+  vertical-align: middle;
+  position: relative;
+  text-align: center;
+}
+.qkbox .entry .headwrap {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  background: #fff;
+  height: 40px;
+  width: 40px;
+}
+.qkbox .entry .head {
+  width: 40px;
+  height: 40px;
+}
+.qkbox .entry .nick {
+  vertical-align: top;
+  display: block;
+  word-wrap: break-word;
+  margin-top: 5px;
+  text-align: center;
+  color: #8d8d8d;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.qkbox .qkbox-x {
+  background: url("http://3gimg.qq.com/ptlogin/touch/img/common/delete.png") no-repeat top left;
+  display: block;
+  height: 18px;
+  position: absolute;
+  right: 5px;
+  text-indent: -9000em;
+  top: -5px;
+  width: 19px;
+}
+#qkbox-cmode {
+  float: left;
+}
+#qkbox-switch {
+  float: right;
+}
+#ptcontainer img {
+  display: inline;
+}
+#ptcontainer input:focus {
+  outline: none;
+}
+.pvbox .main {
+  margin: 20px 15px;
+  height: 42px;
+  background: #fff;
+  border: 1px solid rgba(57, 84, 106, 0.28);
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+.pvbox .main div {
+  -moz-border-radius: 6px 0 0 6px;
+  -webkit-border-radius: 6px 0 0 6px;
+  border-radius: 6px 0 0 6px;
+  background: #ffffff;
+  padding: 2px;
+  width: 110px;
+  border-right: 1px solid #ebebec;
+  float: left;
+  height: 38px;
+}
+.pvbox .main input {
+  float: left;
+  border: none;
+  height: 24px;
+  font-size: 24px;
+  padding: 0px 0px 0px 4px;
+  width: 90px;
+  height: 42px;
+  border-left: 1px solid #d4d5d6;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  color: #676869;
+  font-size: 14px;
+}
+#qkbox-close {
+  display: none;
+}
+.qkbox a,
+.cmbox a {
+  color: #000;
+  font-size: 13px;
+  text-decoration: none;
+}
+#pttip {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  z-index: 9999;
+  margin-top: -100px;
+  margin-left: -150px;
+  width: 300px;
+  height: auto;
+}
+#pttip .main {
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.8);
+  border-radius: 4px 4px 4px 4px;
+  color: #FFFFFF;
+  display: inline-block;
+  line-height: 1.5em;
+  max-width: 230px;
+  padding: 15px 15px 15px 45px;
+  position: relative;
+  text-align: left;
+  font-size: 12px;
+  height: auto;
+}
+#pttip .main .pttip-icon {
+  background-image: url(http://3gimg.qq.com/ptlogin/touch/img/common/hint.png);
+  width: 32px;
+  height: 32px;
+  vertical-align: middle;
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  top: 11px;
+  background-repeat: no-repeat;
+  background-size: 25px auto;
+}
+.verify_box {
+  height: 182px;
+}

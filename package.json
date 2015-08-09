@@ -1,0 +1,13 @@
+{
+  "name": "html regression testing",
+  "description": "html regression testing",
+  "version": "0.1",
+  "main": "index.html",
+  "window": {
+    "toolbar": true,
+    "width": 674,
+    "height": 610,
+    "position": "center",
+    "resizable":false
+  }
+}

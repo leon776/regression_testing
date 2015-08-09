@@ -1,0 +1,235 @@
+/*CSS Reset*/
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+header,
+hgroup,
+nav,
+section,
+article,
+aside,
+footer,
+figure,
+figcaption,
+menu {
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+html,
+body {
+  min-height: 100%;
+  height: 100%;
+}
+body {
+  font-family: 'Helvetica Neue', 'Roboto', "microsoft yahei";
+  line-height: 24px;
+  font-size: 14px;
+  color: #1e1e1e;
+  -webkit-user-select: none;
+  -webkit-text-size-adjust: none;
+  background: #f2f2f2;
+}
+body.white {
+  background: #fff;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+fieldset,
+img {
+  display: block;
+  border: 0;
+}
+li {
+  list-style: none;
+}
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+a,
+a:link,
+a:visited,
+a:hover,
+a:active,
+[onclick],
+input {
+  text-decoration: none;
+  color: #f7a100;
+  -webkit-tap-highlight-color: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+header,
+nav,
+section,
+article,
+footer,
+figure,
+figcaption {
+  display: block;
+}
+body {
+  background: #efeff4;
+  font-family: 'SourceHanSansCN-Normal' 'Helvetica Neue', 'Roboto', "microsoft yahei";
+}
+.mod-empower {
+  position: relative;
+}
+.mod-empower .title-bar {
+  position: relative;
+  height: 43px;
+  line-height: 43px;
+  border-bottom: 1px solid #d1d1d3;
+  text-align: center;
+  background: #fff;
+}
+.mod-empower .title-bar h1 {
+  font-size: 18px;
+  color: #333;
+}
+.mod-empower .title-bar a.cls {
+  position: absolute;
+  right: 24px;
+  top: 0;
+  font-size: 15px;
+  color: #333;
+}
+.mod-empower .logo {
+  padding-top: 35px;
+  padding-bottom: 18px;
+  text-align: center;
+  background: #f7f7f7;
+  border-bottom: 1px solid #d1d1d3;
+}
+.mod-empower .logo .logo-img {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 11px;
+  -webkit-border-radius: 3px;
+  border: 2px solid #fff;
+}
+.mod-empower .logo h2 {
+  position: relative;
+  top: 5px;
+  font-size: 14px;
+  color: #010101;
+}
+.mod-empower .main-text {
+  padding: 11px 22px;
+  font-size: 12px;
+  color: #777;
+}
+.mod-empower .main-text p {
+  height: 12px;
+  line-height: 12px;
+  margin-bottom: 14px;
+}
+.mod-empower .main-text .title {
+  height: 14px;
+  line-height: 14px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  color: #333;
+}
+.mod-empower .main-text input[type='checkbox'] {
+  vertical-align: bottom;
+  margin-right: 9px;
+}
+.mod-empower .main-text .btn {
+  margin: 14px -22px 0;
+  text-align: center;
+}
+.mod-empower .main-text .btn a {
+  width: 100%;
+  height: 43px;
+  line-height: 43px;
+  display: block;
+  color: #fff;
+  background: #fff;
+  font-size: 14px;
+  color: #4694ff;
+  border-top: 1px solid #e3e3e8;
+  border-bottom: 1px solid #e3e3e8;
+}
+.mod-empower .btn-return {
+  background: url(../img/sprites.png) no-repeat -280px 14px;
+  -webkit-background-size: 320px auto;
+  background-size: 320px auto;
+  padding-left: 20px;
+  font-size: 16px;
+  color: #1e1e1e!important;
+  position: absolute;
+  top: 0;
+  left: 22px;
+  height: 43px;
+  line-height: 43px;
+  -webkit-tap-highlight-color: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.mod-empower .usr {
+  position: relative;
+  padding: 2px 22px 0;
+  font-size: 14px;
+  color: #333;
+}
+.mod-empower .usr .main {
+  margin-left: 56px;
+}
+.mod-empower .usr .name em {
+  margin-left: 7px;
+  font-size: 11px;
+  color: #777;
+  font-style: normal;
+  position: relative;
+  top: 1px;
+}
+.mod-empower .usr .btn-txt {
+  color: #4694ff;
+  float: right;
+  font-size: 11px;
+  position: relative;
+  top: 2px;
+}
+.mod-empower .usr img {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  -webkit-border-radius: 100%;
+  top: -25px;
+}

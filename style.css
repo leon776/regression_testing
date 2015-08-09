@@ -1,0 +1,21 @@
+body {-webkit-user-select: none;  }
+.hidden{position: absolute;left:-9999em;}
+.warp{padding: 12px 24px 0;}
+.warp .item{margin-bottom: 14px;}
+label{display: inline-block; cursor: pointer;}
+.upload-area{ position: relative; border: 2px dashed #ddd;width: 100%; height: 100px;line-height: 100px;text-align: center;box-sizing: border-box;}
+.upload-area p, .upload-area .label-area{font-size: 14px;pointer-events: none}
+.upload-area p{position: absolute;font-size: 14px; pointer-events: none;width: 100%;top: -19px;}
+.upload-area .icon-plus{position: relative;top: 1px;}
+.upload-area.on{border-color: #3a87ad;}
+.upload-area .label-area{ position: absolute;left: 0;top: 50%;width: 100%; height: 16px;line-height: 16px;margin-top: -26px}
+.upload-area label{pointer-events: auto;position: relative;top:14px;}
+.log{padding:0;border: 1px solid #dcdcdc;box-sizing: border-box;height: 240px;overflow: auto}
+.log textarea{width: 100%;border: none;resize: none;box-shadow: none;outline: none;padding: 0;margin: 0}
+.log table{margin-bottom: 0}
+.log table tr.error td{background: #b94a48;color: #fff;}
+.log table tr.error td a{color: #fff;}
+.table th, .table td{border: none}
+.log thead{display: none}
+.controls label, .controls button {margin-right: 6px;}
+#htmlVersion{margin-right: 10px}
