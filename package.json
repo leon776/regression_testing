@@ -4,9 +4,9 @@
   "version": "0.1",
   "main": "index.html",
   "window": {
-    "toolbar": true,
+    "toolbar": false,
     "width": 674,
-    "height": 610,
+    "height": 580,
     "position": "center",
     "resizable":false
   }

@@ -13,12 +13,12 @@
 <div class="warp">
     <input type="file" id="uploadCss" class="hidden"/>
     <script>
-        document.write('<input id="filePathDialog" type="file" nwdirectory nwworkingdir="'+ process.cwd() +'" class="hidden">')
+        document.write('<input id="filePathDialog" type="file" nwdirectory nwworkingdir="" class="hidden">')
     </script>
     <div id="alert" class="alert ">提示：请先选择html文件目录，默认当前软件所在目录</div>
     <div class="item file-path input-append">
         <p><i class="icon-folder-open"></i> html文件目录：
-        <script>document.write('<input id="dest" type="text" class="path span4" value="'+ process.cwd() +'" style="width: 487px;">')</script>
+        <script>document.write('<input id="dest" type="text" class="path span4" value="'+ process.cwd() +'" style="width: 504px;">')</script>
         </p>
     </div>
     <div id="dragUpload" class="item upload-area">
@@ -31,7 +31,7 @@
             <thead>
             <tr>
                 <td></td>
-                <td width="30" align="center"></td>
+                <td style="text-align: center;width: 50px;"></td>
             </tr>
             </thead>
             <tbody id="outPutMsg" style="  -webkit-user-select: initial;">
@@ -52,7 +52,8 @@
                 <button class="btn" id="createVersion">生成版本</button>
                 <button class="btn" id="delVersion">删除版本</button>
                 <button class="btn" id="startTest">回归测试</button>
-                <label class="btn" for="uploadCss">检查无用CSS</label>
+                <label class="btn" for="uploadCss" id="uploadCssLb">上传Css</label>
+                <button class="btn" id="startCssTest">检测无用Css</button>
             </div>
         </div>
     <div class="progress" id="progress" style="display: none;">
@@ -63,7 +64,7 @@
         <% for (var i = 0; i < msg.length; i ++) { %>
         <tr class="<%if( (msg[i].type) === 1 ) {%> error <%}%>">
             <td><%=msg[i].txt%></td>
-            <td>
+            <td style="text-align: center;width: 120px;">
                 <%if( (msg[i].type) === 0 ) {%>
                     <i class="icon-ok"></i>
                     <%} else if( (msg[i].type) === 1 ) {%>

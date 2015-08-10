@@ -12,9 +12,10 @@ label{display: inline-block; cursor: pointer;}
 .upload-area label{pointer-events: auto;position: relative;top:14px;}
 .log{padding:0;border: 1px solid #dcdcdc;box-sizing: border-box;height: 240px;overflow: auto}
 .log textarea{width: 100%;border: none;resize: none;box-shadow: none;outline: none;padding: 0;margin: 0}
-.log table{margin-bottom: 0}
+.log table{margin-bottom: 0;table-layout: fixed;}
 .log table tr.error td{background: #b94a48;color: #fff;}
 .log table tr.error td a{color: #fff;}
+select{width: 170px;}
 .table th, .table td{border: none}
 .log thead{display: none}
 .controls label, .controls button {margin-right: 6px;}
