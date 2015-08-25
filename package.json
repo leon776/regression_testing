@@ -5,8 +5,8 @@
   "main": "index.html",
   "window": {
     "toolbar": true,
-    "width": 674,
-    "height": 580,
+    "width": 890,
+    "height": 700,
     "position": "center",
     "resizable":false
   }

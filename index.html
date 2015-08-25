@@ -6,16 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
-    <script type="text/javascript" src="js/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="js/lib/jquery-1.7.2.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
 <div class="warp">
+    <ul id="nav" class="nav nav-tabs">
+        <li class="active" data-for="btn-group-test">
+            <a href="#">回归测试</a>
+        </li>
+        <li data-for="btn-group-css"><a href="#">删除无用样式</a></li>
+    </ul>
     <input type="file" id="uploadCss" class="hidden"/>
     <script>
         document.write('<input id="filePathDialog" type="file" nwdirectory nwworkingdir="" class="hidden">')
     </script>
-    <div id="alert" class="alert ">提示：请先选择html文件目录，默认当前软件所在目录</div>
+
     <div class="item file-path input-append">
         <p><i class="icon-folder-open"></i> html文件目录：
         <script>document.write('<input id="dest" type="text" class="path span4" value="'+ process.cwd() +'" style="width: 504px;">')</script>
@@ -44,57 +50,62 @@
     </div>
 
     <div class="item control-group">
-        <div class="controls">
+        <div class="controls btn-group-test">
             <div class="input-append">
-                <select name="htmlVersion" id="htmlVersion">
-                    <option value="0">请选择要比对的版本</option>
-                </select>
-                <button class="btn" id="createVersion">生成版本</button>
-                <button class="btn" id="delVersion">删除版本</button>
-                <button class="btn" id="startTest">回归测试</button>
-            </div>
-        </div>
-        <div class="controls" style="margin:10px 0">
-            <label class="btn" for="uploadCss" id="uploadCssLb">上传Css</label>
-            <button class="btn" id="startCssTest">检测无用Css</button>
+                <!--<select name="htmlVersion" id="htmlVersion">
+                   <option value="0">请选择要比对的版本</option>
+               </select>-->
+                测试窗口宽度：<input type="text" class="input-mini" id="iframeWidth" placeholder="" value="640"/>
+                测试窗口高度：<input type="text" class="input-mini" id="iframeHeight" placeholder="" value="1280"/>
+               <button class="btn" id="createVersion">更新用例</button>
+               <button class="btn" id="startTest">回归测试</button>
+           </div>
+       </div>
+       <div class="controls btn-group-css" style="margin:10px 0;display:none ">
+           <label class="btn" for="uploadCss" id="uploadCssLb">上传Css</label>
+           <button class="btn" id="startCssTest">检测无用选择器</button>
+       </div>
+        <div class="controls btn-group-css" style="margin:10px 0;display:none ">
+            <input type="text" id="filterJsClass" placeholder="js动态样式，请用逗号隔开" value="on"/>
             <button class="btn" id="clearUselessCss">一键清理</button>
         </div>
+   <div class="progress" id="progress" style="display: none;">
+       <div class="bar" style="width: 0;"></div>
+   </div>
+   <iframe src="" frameborder="0" id="iframe" class="hidden"></iframe>
 
-    <div class="progress" id="progress" style="display: none;">
-        <div class="bar" style="width: 0;"></div>
-    </div>
-    <iframe src="" frameborder="0" id="iframe" class="hidden"></iframe>
-    
-    <script id="msgTepl" type="text/html">
-        <% for (var i = 0; i < msg.length; i ++) { %>
-        <tr class="<%if( (msg[i].type) === 1 ) {%> error <%}%>">
-            <td><%=msg[i].txt%></td>
-            <td style="text-align: center;width: 120px;">
-                <%if( (msg[i].type) === 0 ) {%>
-                    <i class="icon-ok"></i>
-                    <%} else if( (msg[i].type) === 1 ) {%>
-                        <a href="javascript:" onclick="showLog('<%=msg[i].id%>')"><i class=" icon-flag"></i> 查看详情</a>
-                <%}%>
-            </td>
-        </tr>
-        <% } %>
-    </script>
+   <script id="msgTepl" type="text/html">
+       <% for (var i = 0; i < msg.length; i ++) { %>
+       <tr class="<%if( (msg[i].type) === 1 ) {%> error <%}%>">
+           <td><%=msg[i].txt%></td>
+           <td style="text-align: center;width: 120px;">
+               <%if( (msg[i].type) === 0 ) {%>
+               <a href="javascript:" onclick="updateTestCase('<%=msg[i].id%>')"><i class="icon-ok"></i> 更新用例</a>
+                   <%} else if( (msg[i].type) === 1 ) {%>
+                       <a href="javascript:" onclick="showLog('<%=msg[i].id%>')"><i class=" icon-flag"></i> 查看详情</a>
+               <%}%>
+           </td>
+       </tr>
+       <% } %>
+   </script>
 
-    <script id="msgTeplCss" type="text/html">
-        <% for (var i = 0; i < msg.length; i ++) { %>
-        <tr class="<%if( (msg[i].type) === 1 ) {%> error <%}%>">
-            <td><%=msg[i].txt%></td>
-            <td style="text-align: center;width: 120px;">
-                <%if( (msg[i].type) === 1 ) {%>
-                <i class="icon-ok"></i>
-                <%} else if( (msg[i].type) === 0 ) {%>
-                <a href="javascript:" onclick="showLogCss('<%=msg[i].id%>')"><i class=" icon-flag"></i> 查看详情</a>
-                <%}%>
-            </td>
-        </tr>
-        <% } %>
-    </script>
+   <script id="msgTeplCss" type="text/html">
+       <% for (var i = 0; i < msg.length; i ++) { %>
+       <tr class="<%if( (msg[i].type) === 1 ) {%> error <%}%>">
+           <td><%=msg[i].txt%></td>
+           <td style="text-align: center;width: 120px;">
+               <%if( (msg[i].type) === 1 ) {%>
+               <i class="icon-ok"></i>
+               <%} else if( (msg[i].type) === 0 ) {%>
+               <a href="javascript:" onclick="showLogCss('<%=msg[i].id%>')"><i class=" icon-flag"></i> 查看详情</a>
+               <%}%>
+           </td>
+       </tr>
+       <% } %>
+   </script>
 
 </div>
+
+   <div id="alert" class="alert ">提示：请先选择html文件目录，默认当前软件所在目录</div>
 </body>
 </html>

@@ -1,5 +1,10 @@
 body {-webkit-user-select: none;  }
-.hidden{position: absolute;left:-9999em;}
+#iframe{
+    z-index: -9999;
+    width: 99999px;
+    height: 9999px;
+}
+.hidden{position: absolute;left:-9999em;z-index: -9999}
 .warp{padding: 12px 24px 0;}
 .warp .item{margin-bottom: 14px;}
 label{display: inline-block; cursor: pointer;}
@@ -20,3 +25,7 @@ select{width: 170px;}
 .log thead{display: none}
 .controls label, .controls button {margin-right: 6px;}
 #htmlVersion{margin-right: 10px}
+.progress{margin: 14px 0;}
+.progress .bar{-webkit-transition-duration:0;transition-duration:0;}
+#filterJsClass{margin-bottom: 0}
+.input-append input, .input-append select, .input-append .uneditable-input{border-radius: 3px;}
