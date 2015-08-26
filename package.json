@@ -3,6 +3,7 @@
   "description": "html regression testing",
   "version": "0.1",
   "main": "index.html",
+  "chromium-args": "--enable-usermedia-screen-capturing",
   "window": {
     "toolbar": true,
     "width": 890,

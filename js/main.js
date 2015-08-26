@@ -14,13 +14,21 @@ var path = require('path'),
     gui = require('nw.gui'),
     moment = require('moment'),
     template = require('art-template'),
-    msgTepl, render, msgTeplCss, renderCss;
+    msgTepl = $('#msgTepl')[0].innerText,
+    msgTeplCss = $('#msgTeplCss')[0].innerText,
+    msgTepload = $('#loadTepl')[0].innerText,
+    render = template.compile(msgTepl),
+    renderCss = template.compile(msgTeplCss),
+    renderLoad = template.compile(msgTepload);
     //shell = gui.Shell;
     global.$ = $;
     global.data = {};
     global.cssData = {};
 
-var CssOperater = require('./js/css_operater');
+
+var CssOperater = require('./js/css_operater'),
+    PhantomRender = require('./js/phantom_render'),
+    FileOperater = require('./js/file_operater');
 //debug
 for(var module in global.require.cache){
     if(global.require.cache.hasOwnProperty(module)){
@@ -72,17 +80,31 @@ domDragEnd = function(obj) {
     $(obj).children('.label-area').show();
 },
 updateTestCase = function(src) {
-    console.log(src)
-    app.createTestJson(src);
+    app.createTestJson(src, function() {
+        app.readFolder($('#dest').val());
+    });
 },
 showLog = function(id) {
     var win = gui.Window.open('log.html', {
         position: 'center',
         width: 800,
-        height: 600
+        height: 600,
+        toolbar: false
     });
     win.on('document-end', function () {
         win.window.document.getElementById('log').value = global.data[id].data;
+    });
+},
+showPic = function(name, dest) {
+    var win = gui.Window.open('contrast_img.html', {
+        position: 'center',
+        width: 1280,
+        height: 720,
+        toolbar: false
+    }), str = '';
+    win.on('document-end', function () {
+        win.window.document.getElementById('master').src = dest + '/.testData/imgMaster/' + name+ '.png';
+        win.window.document.getElementById('slave').src = dest + '/.testData/imgSlave/' + name+ '.png';
     });
 },
 showLogCss = function(id) {
@@ -103,57 +125,6 @@ showLogCss = function(id) {
 };
 
 
-var FileOperater = {
-    fileMapping : function(fpath) {
-        var tmp = [];
-        var files = fs.readdirSync(fpath);
-        files.forEach(function(file){
-            var tempPath = path.join(fpath, file);
-            var stats = fs.statSync(tempPath);
-            if(stats.isDirectory()){
-                tmp.push(path.basename(tempPath));
-            }
-        });
-        return tmp;
-    },
-    scanFolder : function (fpath){
-        var fileList = [],
-            folderList = [],
-            files,
-            walk = function(fpath, fileList, folderList){
-                files = fs.readdirSync(fpath);
-                files.forEach(function(item) {
-                    var tmpPath = path.join(fpath, item),
-                        stats = fs.statSync(tmpPath);
-                    if (stats.isDirectory()) {
-                        walk(tmpPath, fileList, folderList);
-                        folderList.push(tmpPath);
-                    } else {
-                        fileList.push(tmpPath);
-                    }
-                });
-            };
-
-        walk(fpath, fileList, folderList);
-        console.log('扫描' + fpath +'成功');
-        return fileList;
-    },
-    deleteFolderRecursive : function(fpath) {
-        var files = [];
-        if( fs.existsSync(fpath) ) {
-            files = fs.readdirSync(fpath);
-            files.forEach(function(file, index){
-                var curPath = path.join(fpath, file);
-                if(fs.statSync(curPath).isDirectory()) { // recurse
-                    deleteFolderRecursive(curPath);
-                } else { // delete file
-                    fs.unlinkSync(curPath);
-                }
-            });
-            fs.rmdirSync(fpath);
-        }
-    }
-};
 
 var App = (function() {
     var App = function(option) {
@@ -185,6 +156,9 @@ var App = (function() {
         $('#startTest').click(function() {
             self.startTest();
         });
+        $('#laodTestData').click(function() {
+            self.readFolder(self.dest);
+        });
         $('#uploadCss').change(function() {
             self.cssPath = this.value;
             self.getUselessCss(this.value);
@@ -211,6 +185,8 @@ var App = (function() {
             self.dest = fileList[0].path;
             if(!fs.existsSync(self.dest + '/.testdata/')) {
                 fs.mkdirSync(self.dest + '/.testdata');
+                fs.mkdirSync(self.dest + '/.testdata/imgMaster');
+                fs.mkdirSync(self.dest + '/.testdata/imgSlave');
             }
             self.htmlfile = [];
             self.loadTestData();
@@ -221,6 +197,8 @@ var App = (function() {
             self.dest = this.value;
             if(!fs.existsSync(self.dest + '/.testdata/')) {
                 fs.mkdirSync(self.dest + '/.testdata');
+                fs.mkdirSync(self.dest + '/.testdata/imgMaster');
+                fs.mkdirSync(self.dest + '/.testdata/imgSlave');
             }
             self.htmlfile = [];
             self.loadTestData();
@@ -336,7 +314,7 @@ var App = (function() {
         }
     };
     //清理css功能end
-    App.prototype.createTestJson = function(fileSrc) {
+    App.prototype.createTestJson = function(fileSrc, callback) {
         if(this.htmlfile.length === 0) {
             this.tip('请先选择html目录', 'alert-error');
             return;
@@ -355,19 +333,22 @@ var App = (function() {
             self.frame.onload = function() {
                 var frame = this;
                 window.setTimeout(function() {
-                    var nodes = frame.contentWindow.document.getElementsByTagName('*');
-                    var json = JSON.stringify(self.getStyleJson(nodes));
+                    var nodes = frame.contentWindow.document.getElementsByTagName('*'),
+                        json = JSON.stringify(self.getStyleJson(nodes)),
+                        _fileName = fileSrc ? path.basename(fileSrc) : self.htmlfile[self.curPage].name;
                     if(!fileSrc){
-                        fs.writeFile(ver + '/' + self.htmlfile[self.curPage].name + '.json', json, 'utf-8');
                         self.curPage++;
-                    } else {
-                        fs.writeFile(ver + '/' + path.basename(fileSrc) + '.json', json, 'utf-8');
                     }
+                    fs.writeFile(ver + '/' + _fileName + '.json', json, 'utf-8');
+                    self.createPrintscreen(frame.src, _fileName);
+                    //fs.writeFile(ver + '/' + self.htmlfile[self.curPage].name + '.json', json, 'utf-8');
+
                     self._showProcess();
                     if(self.curPage == self.htmlfile.length || fileSrc) {
                         self.tip('版本生成成功', 'alert-success');
                         self.loadTestData();
                         self.curPage = 0;
+                        callback && callback();
                     } else {
                         if(!fileSrc) _create();
                     }
@@ -388,7 +369,15 @@ var App = (function() {
         _contrast();
         function _contrast() {
             for(var i = self.curPage; i < self.htmlfile.length; i++) {
+                try{
                 testData = JSON.parse(fs.readFileSync(testDataPath + '/' + self.htmlfile[i].name + '.json', 'utf8'));
+                } catch (e) {
+                    self.tip('缺少'+ self.htmlfile[i].name +'的测试用例，测试终止', 'error');
+                    self.curPage = 0;
+                    //self.readFolder(self.dest);
+                    $('#progress').hide();
+                    return;
+                }
                 (function() {
                     var tmp = i;
                     self.frame.src = self.htmlfile[i].path;
@@ -397,7 +386,10 @@ var App = (function() {
                         window.setTimeout(function() {
                             var nodes = frame.contentWindow.document.getElementsByTagName('*');
                             self.curPage++;
-                            $('#outPutMsg').append(render({"msg" : self.contrastPage(nodes, testData, self.htmlfile[tmp].path)}));
+                            $('#outPutMsg').append(render({"msg" :
+                                self.contrastPage(nodes, testData, self.htmlfile[tmp].path, PhantomRender, self.dest, self.frame.src)
+                                })
+                            );
                             self._showProcess();
                             if(self.curPage == self.htmlfile.length) {
                                 self.tip('测试完毕', 'alert-success');
@@ -413,7 +405,12 @@ var App = (function() {
             }
         }
     };
-
+    App.prototype.createPrintscreen = function(filePath, fileName) {
+        //console.log(filePath)
+        PhantomRender.render(filePath, fileName, this.dest + '/.testdata/imgMaster/', function() {
+            console.log(1)
+        })
+    };
     App.prototype.loadTestData = function() {
         this.testData = FileOperater.fileMapping(this.dest + '/.testdata');
     };
@@ -431,22 +428,29 @@ var App = (function() {
 
 
     App.prototype.readFolder = function(fpath) {
-        var files = FileOperater.scanFolder(fpath), msg = [];
+        var files = FileOperater.scanFolder(fpath), msg = [], type, file;
+        this.htmlfile = [];
         for(var name in files) {
-            if(path.extname(files[name]) === '.html') {
+            file = files[name];
+            if(path.extname(file) === '.html') {
                 this.htmlfile.push({
-                    "name" : path.basename(files[name]),
-                    "path" : files[name]
+                    "name" : path.basename(file),
+                    "path" : file
                 });
+                if( !fs.existsSync(this.dest + '/.testdata/' + path.basename(file) + '.json') ) {
+                    type = 1
+                } else {
+                    type = 0;
+                }
                 msg.push({
-                    "txt": '读取' + path.basename(files[name]) + '成功',
-                    "type": 0,
-                    "id": files[name].replace(/\\/g, '\\\\')
+                    "txt": '读取' + path.basename(file) + '成功',
+                    "type": type,
+                    "id": file.replace(/\\/g, '\\\\')
                 });
             }
         }
         this.tip('html文件读取成功', 'alert-success');
-        $('#outPutMsg').html(render({"msg" : msg}));
+        $('#outPutMsg').html(renderLoad({"msg" : msg}));
     };
 
     App.prototype.tip = function(txt, cls) {
@@ -463,10 +467,9 @@ var App = (function() {
         if(!fs.existsSync(this.dest + '/.testdata/')) {
             fs.mkdirSync(this.dest + '/.testdata');
         }
-        msgTepl = $('#msgTepl')[0].innerText;
-        msgTeplCss = $('#msgTeplCss')[0].innerText;
-        render = template.compile(msgTepl);
-        renderCss = template.compile(msgTeplCss);
+
+
+
         this.bindEvent();
         this.loadTestData();
         this.readFolder(this.dest);

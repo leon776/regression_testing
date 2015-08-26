@@ -23,6 +23,7 @@ label{display: inline-block; cursor: pointer;}
 select{width: 170px;}
 .table th, .table td{border: none}
 .log thead{display: none}
+.controls{margin: 10px 0}
 .controls label, .controls button {margin-right: 6px;}
 #htmlVersion{margin-right: 10px}
 .progress{margin: 14px 0;}

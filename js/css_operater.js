@@ -3,6 +3,7 @@
  * Created by xiaoweili on 2015/8/17.
  */
 var CleanCSS = require('clean-css'),
+    path =  require('path'),
     md5 = require('md5');
 
 //css处理类
@@ -38,7 +39,6 @@ var CssOperater = (function() {
                                     replace(/\s+/g, '\\s');
             regComma  = new RegExp('([},\\t\\n\\s\\/]+)' + _selecter + '\\s*,', "g");
             regStyle  = new RegExp('([},][\\t\\n\\s\\/]*|\\*\\/[\\t\\n\\s\\/]*)' + _selecter + '\\s*{([^}]*)}', "g");
-
             str       = str.replace(regComma, '$1').replace(regStyle, '$1');
         }
         return str;
@@ -66,12 +66,13 @@ var CssOperater = (function() {
         var reg  = new RegExp(_selecter + '[^}]*?}', "g");
         return str.match(reg)[0];
     };
-    Operater.prototype.contrastPage = function (nodes, testData, pageName, callback) {
+    Operater.prototype.contrastPage = function (nodes, testData, pageName, PhantomRender, dest, src, callback) {
         var flag = false,
             msg = [],
             str = '',
             pid = md5(pageName),
             _hasChangedNodes = [];
+            _hasChangedNodesPosition = [];
         for(var i = nodes.length - 1; i >= 0; i--) {
             var node = this._getStyle(nodes[i]),
                 testDataTmp = testData[md5(i + nodes[i].tagName)];
@@ -86,8 +87,9 @@ var CssOperater = (function() {
                 if(_hasChangedChild(nodes[i].outerHTML)) {
                     continue;//有子节点发生改变的节点就不统计了
                 }
-                str += "\n元素" + nodes[i].outerHTML + '发生了改变\n';
+                str += "\n**********************************************************************\n元素" + nodes[i].outerHTML + '发生了改变\n**********************************************************************\n';
                 _hasChangedNodes.push(nodes[i].outerHTML);
+                _hasChangedNodesPosition.push(i);
                 for (var j in testDataTmp) {
                     if(!(testDataTmp[j] === node[j])) {
                         str += j + '的值由：' + testDataTmp[j] + '变为了：' + node[j] + '\n';
@@ -105,10 +107,13 @@ var CssOperater = (function() {
             msg.push({
                 "txt": "网页"+ pageName + "有变化",
                 "type": 1,
-                "id": pid
+                "id": pid,
+                "fileName": path.basename(pageName),
+                "dest": dest
             });
         }
         global.data[pid] = {"data" : str};
+        PhantomRender.render(src, path.basename(pageName), dest + '/.testdata/imgSlave/', _hasChangedNodesPosition);
         return msg;
         //判断是否有子节点发生改变
         function _hasChangedChild(str) {

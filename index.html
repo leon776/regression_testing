@@ -7,7 +7,7 @@
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
     <script type="text/javascript" src="js/lib/jquery-1.7.2.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+
 </head>
 <body>
 <div class="warp">
@@ -24,7 +24,8 @@
 
     <div class="item file-path input-append">
         <p><i class="icon-folder-open"></i> html文件目录：
-        <script>document.write('<input id="dest" type="text" class="path span4" value="'+ process.cwd() +'" style="width: 504px;">')</script>
+        <script>document.write('<input id="dest" type="text" class="path span4" value="F:/public_html/node-webkit/nwjs-v0.12.2-win-x64/debug/regression_testing/test" style="width: 504px;">')</script>
+            <button class="btn" id="laodTestData">读取文件</button>
         </p>
     </div>
     <div id="dragUpload" class="item upload-area">
@@ -57,15 +58,19 @@
                </select>-->
                 测试窗口宽度：<input type="text" class="input-mini" id="iframeWidth" placeholder="" value="640"/>
                 测试窗口高度：<input type="text" class="input-mini" id="iframeHeight" placeholder="" value="1280"/>
-               <button class="btn" id="createVersion">更新用例</button>
-               <button class="btn" id="startTest">回归测试</button>
            </div>
        </div>
-       <div class="controls btn-group-css" style="margin:10px 0;display:none ">
+        <div class="controls btn-group-test">
+            <div class="input-append">
+                <button class="btn" id="createVersion">批量更新用例</button>
+                <button class="btn" id="startTest">回归测试</button>
+            </div>
+        </div>
+       <div class="controls btn-group-css" style="display:none ">
            <label class="btn" for="uploadCss" id="uploadCssLb">上传Css</label>
            <button class="btn" id="startCssTest">检测无用选择器</button>
        </div>
-        <div class="controls btn-group-css" style="margin:10px 0;display:none ">
+        <div class="controls btn-group-css" style="display:none ">
             <input type="text" id="filterJsClass" placeholder="js动态样式，请用逗号隔开" value="on"/>
             <button class="btn" id="clearUselessCss">一键清理</button>
         </div>
@@ -78,16 +83,33 @@
        <% for (var i = 0; i < msg.length; i ++) { %>
        <tr class="<%if( (msg[i].type) === 1 ) {%> error <%}%>">
            <td><%=msg[i].txt%></td>
-           <td style="text-align: center;width: 120px;">
+           <td style="text-align: center; width: 180px;">
                <%if( (msg[i].type) === 0 ) {%>
-               <a href="javascript:" onclick="updateTestCase('<%=msg[i].id%>')"><i class="icon-ok"></i> 更新用例</a>
-                   <%} else if( (msg[i].type) === 1 ) {%>
-                       <a href="javascript:" onclick="showLog('<%=msg[i].id%>')"><i class=" icon-flag"></i> 查看详情</a>
+               <i class="icon-ok">
+               <%} else if( (msg[i].type) === 1 ) {%>
+               <a href="javascript:" onclick="showPic('<%=msg[i].fileName%>', '<%=msg[i].dest%>')"><i class=" icon-picture"></i> 截图对比</a>
+               <a href="javascript:" onclick="showLog('<%=msg[i].id%>')"><i class=" icon-flag"></i> 数据详情</a>
                <%}%>
            </td>
        </tr>
        <% } %>
    </script>
+
+    <script id="loadTepl" type="text/html">
+        <% for (var i = 0; i < msg.length; i ++) { %>
+        <tr class="<%if( (msg[i].type) === 1 ) {%> error <%}%>">
+            <td><%=msg[i].txt%></td>
+            <td style="text-align: center;width: 120px;">
+                <%if( (msg[i].type) === 0 ) {%>
+                <a href="javascript:" onclick="updateTestCase('<%=msg[i].id%>')"><i class="icon-eye-open"></i> 更新用例</a>
+                <%} else if( (msg[i].type) === 1 ) {%>
+                <a href="javascript:" onclick="updateTestCase('<%=msg[i].id%>')"><i class="icon-eye-close"></i> 生成用例</a>
+                <%}%>
+            </td>
+        </tr>
+        <% } %>
+    </script>
+
 
    <script id="msgTeplCss" type="text/html">
        <% for (var i = 0; i < msg.length; i ++) { %>
@@ -107,5 +129,6 @@
 </div>
 
    <div id="alert" class="alert ">提示：请先选择html文件目录，默认当前软件所在目录</div>
+    <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
