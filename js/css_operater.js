@@ -66,6 +66,8 @@ var CssOperater = (function() {
         var reg  = new RegExp(_selecter + '[^}]*?}', "g");
         return str.match(reg)[0];
     };
+
+    //页面对比
     Operater.prototype.contrastPage = function (nodes, testData, pageName, PhantomRender, dest, src, callback) {
         var flag = false,
             msg = [],

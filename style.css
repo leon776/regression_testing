@@ -15,18 +15,18 @@ label{display: inline-block; cursor: pointer;}
 .upload-area.on{border-color: #3a87ad;}
 .upload-area .label-area{ position: absolute;left: 0;top: 50%;width: 100%; height: 16px;line-height: 16px;margin-top: -26px}
 .upload-area label{pointer-events: auto;position: relative;top:14px;}
-.log{padding:0;border: 1px solid #dcdcdc;box-sizing: border-box;height: 240px;overflow: auto}
+.log{padding:0;border: 1px solid #dcdcdc;box-sizing: border-box;height: 300px;overflow: auto}
 .log textarea{width: 100%;border: none;resize: none;box-shadow: none;outline: none;padding: 0;margin: 0}
 .log table{margin-bottom: 0;table-layout: fixed;}
 .log table tr.error td{background: #b94a48;color: #fff;}
 .log table tr.error td a{color: #fff;}
 select{width: 170px;}
-.table th, .table td{border: none}
+.table th, .table td{border: none; word-break: break-all}
 .log thead{display: none}
 .controls{margin: 10px 0}
 .controls label, .controls button {margin-right: 6px;}
 #htmlVersion{margin-right: 10px}
 .progress{margin: 14px 0;}
 .progress .bar{-webkit-transition-duration:0;transition-duration:0;}
-#filterJsClass{margin-bottom: 0}
+#filterJsClass, #cssPath{margin-bottom: 0}
 .input-append input, .input-append select, .input-append .uneditable-input{border-radius: 3px;}

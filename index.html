@@ -15,7 +15,7 @@
         <li class="active" data-for="btn-group-test">
             <a href="#">回归测试</a>
         </li>
-        <li data-for="btn-group-css"><a href="#">删除无用样式</a></li>
+        <li data-for="btn-group-css"><a href="#">CSS文件分析</a></li>
     </ul>
     <input type="file" id="uploadCss" class="hidden"/>
     <script>
@@ -67,11 +67,13 @@
             </div>
         </div>
        <div class="controls btn-group-css" style="display:none ">
+           <input type="text" id="cssPath" placeholder="css文件路径" value=""/>
            <label class="btn" for="uploadCss" id="uploadCssLb">上传Css</label>
            <button class="btn" id="startCssTest">检测无用选择器</button>
+           <button class="btn" id="startCssRulesTest">检测重复规则</button>
        </div>
         <div class="controls btn-group-css" style="display:none ">
-            <input type="text" id="filterJsClass" placeholder="js动态样式，请用逗号隔开" value="on"/>
+            <input type="text" id="filterJsClass" placeholder="js动态样式，请用逗号隔开" value=""/>
             <button class="btn" id="clearUselessCss">一键清理</button>
         </div>
    <div class="progress" id="progress" style="display: none;">
@@ -126,6 +128,21 @@
        <% } %>
    </script>
 
+
+<script id="msgCssRules" type="text/html">
+    <tr>
+        <td>选择器</td>
+        <td>规则</td>
+        <td style="width: 60px">重复条数</td>
+    </tr>
+    <% for (var i = 0; i < msg.length; i ++) { %>
+    <tr>
+        <td><%=#msg[i].selectors%></td>
+        <td><%=#msg[i].declarations%></td>
+        <td style="width: 60px"><%=msg[i].count%></td>
+    </tr>
+    <% } %>
+</script>
 </div>
 
    <div id="alert" class="alert ">提示：请先选择html文件目录，默认当前软件所在目录</div>

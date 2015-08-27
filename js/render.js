@@ -22,8 +22,7 @@ page.open(url, 'GET', changeNode, function (status)
         window.scrollTo(0,10000);//滚动到底部
         //window.document.body.scrollTop = document.body.scrollHeight;
 
-        window.setTimeout(function()
-        {
+        window.setTimeout(function() {
             var plist = document.querySelectorAll("*");
             var len = plist.length;
             var el;

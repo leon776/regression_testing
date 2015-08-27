@@ -18,9 +18,9 @@ var PhantomRender = {
         ];
         //console.log(childArgs);
         childProcess.execFile(binPath, childArgs, function(err, stdout, stderr) {
-            console.log(err);
-            console.log(stdout);
-            console.log(stderr);
+            //console.log(err);
+            //console.log(stdout);
+            //console.log(stderr);
             callback && callback();
         });
     }

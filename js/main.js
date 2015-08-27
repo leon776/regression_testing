@@ -17,11 +17,15 @@ var path = require('path'),
     msgTepl = $('#msgTepl')[0].innerText,
     msgTeplCss = $('#msgTeplCss')[0].innerText,
     msgTepload = $('#loadTepl')[0].innerText,
+    msgTepCssRules = $('#msgCssRules')[0].innerText,
+    grunt = require('grunt'),
     render = template.compile(msgTepl),
     renderCss = template.compile(msgTeplCss),
-    renderLoad = template.compile(msgTepload);
+    renderLoad = template.compile(msgTepload),
+    renderCssRules = template.compile(msgTepCssRules);
     //shell = gui.Shell;
     global.$ = $;
+    global.dirName = process.cwd();
     global.data = {};
     global.cssData = {};
 
@@ -31,6 +35,7 @@ var CssOperater = require('./js/css_operater'),
     FileOperater = require('./js/file_operater');
 //debug
 for(var module in global.require.cache){
+    console.log(module)
     if(global.require.cache.hasOwnProperty(module)){
         delete global.require.cache[module];
     }
@@ -156,16 +161,29 @@ var App = (function() {
         $('#startTest').click(function() {
             self.startTest();
         });
+
         $('#laodTestData').click(function() {
             self.readFolder(self.dest);
         });
         $('#uploadCss').change(function() {
             self.cssPath = this.value;
+            $('#cssPath').val(self.cssPath);
             self.getUselessCss(this.value);
+            self.getRepeatCssRule(this.value);
         });
         $('#startCssTest').click(function() {
             if(self.cssPath) {
                 self.getUselessCss(self.cssPath);
+                self.getRepeatCssRule(self.cssPath);
+            } else {
+                self.tip('清先上传css', 'error');
+            }
+        });
+        $('#startCssRulesTest').click(function() {
+            if(self.cssPath) {
+                window.setTimeout(function() {
+                    self.startCssRulesTest();
+                }, 500);
             } else {
                 self.tip('清先上传css', 'error');
             }
@@ -223,20 +241,19 @@ var App = (function() {
             cssText = fs.readFileSync(cssPath, 'utf-8');
         self.cssSelecter = self.getSelecter(cssText);
         self.tip('css扫描中，请稍后', '');
-
         _scan();
-
         function _scan() {
             for(var i = self.curPage; i < self.htmlfile.length; i++) {
                 self.frame.src = self.htmlfile[i].path;
                 self.frame.onload = function() {
                     for (var j = 0; j < self.cssSelecter.length; j++) {
                         try{
-                            var _selecter = _filterCssSelecter(self.cssSelecter[j]),
+                            var _selecter = _filterJsSelecter(self.cssSelecter[j]),
                                 _dom = this.contentWindow.document.querySelectorAll(_selecter),
                                 _l = _dom.length,
                                 _domHtml = '',
                                 _key = md5(self.cssSelecter[j]);
+
                             hit[_key] = hit[_key] ? hit[_key] + _l : _l;
 
                             if(_l > 0) {
@@ -260,15 +277,18 @@ var App = (function() {
                                 //break;
                             }
                         } catch(e) {
-                            continue;
+                            //continue;
                         }
                     }
                     self.curPage++;
                     self._showProcess();
                     if(self.curPage == self.htmlfile.length) {
-                        self.tip('css扫描完毕', 'alert-success');
-                        self.curPage = 0;
-                        _showRes();
+                        window.setTimeout(function() {
+                            self.tip('css扫描完毕', 'alert-success');
+                            self.curPage = 0;
+                            _showRes();
+                        }, 700);
+
                     } else {
                         if(self.cssSelecter.length > 0) {
                             window.setTimeout(_scan, 200);
@@ -286,22 +306,28 @@ var App = (function() {
                 _key = md5(self.cssSelecter[i]);
                 type = hit[_key] === 0 ? 1 : 0;
                 msg.push({
-                    "id": _key,
-                    "txt": "选择器: " + self.cssSelecter[i] + " 命中DOM节点" + hit[_key] + '次',
-                    "type": type
+                    id: _key,
+                    txt: "选择器: " + self.cssSelecter[i] + " 命中DOM节点" + hit[_key] + '次',
+                    type: type,
+                    hit: hit[_key]
                 });
             }
+            msg = msg.sort( function(x, y){
+                return x.hit > y.hit ? 1:-1;
+            } );
             self.useFulCss = useFulCss;
             self.useLessCss = useLessCss;
             $('#outPutMsg').html('').append(renderCss({"msg" : msg}));
         }
-        function _filterCssSelecter(selecter) {
+        //过滤js动态类
+        function _filterJsSelecter(selecter) {
             var jsSelecter = $('#filterJsClass').val().split(',');
             if(jsSelecter.length !== 0) {
                 for(var i = 0; i < jsSelecter.length; i++) {
-                    selecter = selecter.replace(new RegExp('.' + jsSelecter[i], 'g'), '');
+                    selecter = selecter.replace(new RegExp('/.' + jsSelecter[i], 'g'), '');
                 }
             }
+
             return selecter.split(':')[0];
         }
         function _cj(a, b) { // 差集
@@ -312,6 +338,38 @@ var App = (function() {
                 })
             );
         }
+    };
+    //获取重复规则
+    App.prototype.getRepeatCssRule = function(cssPath) {
+        var gruntFilePath = global.dirName + '/node_modules/grunt-csscss/gruntfile.js',
+            gruntFileData = fs.readFileSync(gruntFilePath + '.tepl', 'utf8');
+        gruntFileData = gruntFileData.replace('!@@@!', cssPath.replace(/\\/g, '/'));
+        fs.writeFileSync(gruntFilePath, gruntFileData, 'utf-8');
+        for(var module in global.require.cache){
+            console.log(module)
+            if(global.require.cache.hasOwnProperty(module)){
+                delete global.require.cache[module];
+            }
+        }
+        grunt.cli({ gruntfile: gruntFilePath});
+    };
+    //显示重复规则
+    App.prototype.startCssRulesTest = function() {
+        var testData = fs.readFileSync(global.dirName + '/node_modules/grunt-csscss/ignore/output.json', 'utf8'), msg = [];
+        testData = JSON.parse(testData);
+        for(var item in testData) {
+            var tmp = testData[item];
+            for(var j = 0; j < tmp.length; j++) {
+                msg.push({
+                    selectors: tmp[j].selectors.join('<br />'),
+                    declarations: tmp[j].declarations.join('<br />'),
+                    count: tmp[j].count
+                });
+            }
+            break;
+        }
+        console.log(msg);
+        $('#outPutMsg').html(renderCssRules({msg : msg}));
     };
     //清理css功能end
     App.prototype.createTestJson = function(fileSrc, callback) {
@@ -341,8 +399,6 @@ var App = (function() {
                     }
                     fs.writeFile(ver + '/' + _fileName + '.json', json, 'utf-8');
                     self.createPrintscreen(frame.src, _fileName);
-                    //fs.writeFile(ver + '/' + self.htmlfile[self.curPage].name + '.json', json, 'utf-8');
-
                     self._showProcess();
                     if(self.curPage == self.htmlfile.length || fileSrc) {
                         self.tip('版本生成成功', 'alert-success');
@@ -406,15 +462,13 @@ var App = (function() {
         }
     };
     App.prototype.createPrintscreen = function(filePath, fileName) {
-        //console.log(filePath)
-        PhantomRender.render(filePath, fileName, this.dest + '/.testdata/imgMaster/', function() {
+       PhantomRender.render(filePath, fileName, this.dest + '/.testdata/imgMaster/', function() {
             console.log(1)
-        })
+       })
     };
     App.prototype.loadTestData = function() {
         this.testData = FileOperater.fileMapping(this.dest + '/.testdata');
     };
-
 
     App.prototype._showProcess = function() {
         var pro = Math.round((this.curPage) * 100 / this.htmlfile.length);
