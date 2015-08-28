@@ -12,6 +12,7 @@ var CssOperater = (function() {
     Operater.prototype.getStyleJson = function (nodes) {
         var res = {};
         for(var i = 0; i < nodes.length; i++) {
+            nodes[i].style.webkitAnimationName = 'none';
             res[md5(i + nodes[i].tagName)] = this._getStyle(nodes[i]);
         }
         return res;
@@ -68,7 +69,7 @@ var CssOperater = (function() {
     };
 
     //页面对比
-    Operater.prototype.contrastPage = function (nodes, testData, pageName, PhantomRender, dest, src, callback) {
+    Operater.prototype.contrastPage = function (nodes, testData, pageName, PhantomRender, dest, src, w, h, callback) {
         var flag = false,
             msg = [],
             str = '',
@@ -76,6 +77,7 @@ var CssOperater = (function() {
             _hasChangedNodes = [];
             _hasChangedNodesPosition = [];
         for(var i = nodes.length - 1; i >= 0; i--) {
+            nodes[i].style.webkitAnimationName = 'none';
             var node = this._getStyle(nodes[i]),
                 testDataTmp = testData[md5(i + nodes[i].tagName)];
             if(!testDataTmp) {
@@ -111,11 +113,11 @@ var CssOperater = (function() {
                 "type": 1,
                 "id": pid,
                 "fileName": path.basename(pageName),
-                "dest": dest
+                "dest": dest.replace(/\\/g,'/')
             });
         }
         global.data[pid] = {"data" : str};
-        PhantomRender.render(src, path.basename(pageName), dest + '/.testdata/imgSlave/', _hasChangedNodesPosition);
+        PhantomRender.render(src, path.basename(pageName), dest + '/.testdata/imgSlave/', _hasChangedNodesPosition, w);
         return msg;
         //判断是否有子节点发生改变
         function _hasChangedChild(str) {

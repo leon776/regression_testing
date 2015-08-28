@@ -8,13 +8,17 @@ var childProcess = require('child_process');
 var binPath = phantomjs.path;
 
 var PhantomRender = {
-    render: function(htmlPath, imgName, createPath, redNodes, callback) {
+    render: function(htmlPath, imgName, createPath, redNodes, w, callback) {
         if(redNodes.length > 0) {
             redNodes = redNodes.join('!#!')
         }
         var childArgs = [
             path.join( './js/render.js'),
-            htmlPath + '!@!' +imgName + '!@!' + createPath + '!@!' + redNodes
+            htmlPath + '!@!' +
+            imgName + '!@!' +
+            createPath + '!@!' +
+            redNodes + '!@!' +
+            w
         ];
         //console.log(childArgs);
         childProcess.execFile(binPath, childArgs, function(err, stdout, stderr) {

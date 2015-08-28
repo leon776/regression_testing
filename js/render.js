@@ -2,9 +2,14 @@ var page = require('webpage').create();
 
 var args = require('system').args;
 args = args[1].split('!@!');
-//console.log(args);
+
 var url = args[0];
 var changeNode = args[3] ? args[3].split('!#!') : [];
+var w = args[4] ? Number(args[4]) : 'auto';
+page.viewportSize = {
+    width: w,
+    height: 1280
+};
 
 page.open(url, 'GET', changeNode, function (status)
 {

@@ -5,7 +5,7 @@
   "main": "index.html",
   "chromium-args": "--enable-usermedia-screen-capturing",
   "window": {
-    "toolbar": true,
+    "toolbar": false,
     "width": 890,
     "height": 700,
     "position": "center",

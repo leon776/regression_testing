@@ -1,0 +1,455 @@
+<!DOCTYPE HTML>
+<html manifest="manifest">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="monicaqin">
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<title>热门游戏</title>
+<link rel="stylesheet" href="../css/main.css">
+<script src="../js/zepto.js"></script>
+</head>
+<body ontouchstart="">
+    <div id="top" class="wrapper">
+         <!--header start-->
+         <header class="mod-header">
+            <a href="#" class="btn-me <!--after-login-->"><img src="http://placeholder.qiniudn.com/64x64"></a>
+             <h1>游戏中心</h1>
+             <a class="btn-search" href="#"></a>
+         </header>
+         <!--header end-->
+
+         <!--content start-->
+         <section class="mod-content mod-recommend-v2" style="display:">
+            <div class="nav">
+                <ul>
+                    <li class="on"><a href="#">首页</a></li>
+                    <li class="active"><a href="#">页游</a></li>
+                    <li><a href="#">单机</a></li>
+                    <li><a href="#">分类</a></li>
+                    <li><a href="#">礼包</a></li>
+                </ul>
+            </div>
+             <!-- slideshow start-->
+             <div class="banner">
+                 <div class="mod-banner">
+                    <div id="slider" class="mod-slidshow">
+                        <ul class="swiper-wrapper">
+                             <li class="swiper-slide"><a href="#"><img src="http://placeholder.qiniudn.com/428x220"></a></li>
+                             <li class="swiper-slide"><a href="#"><img src="http://placeholder.qiniudn.com/428x220"></a></li>
+                             <li class="swiper-slide"><a href="#"><img src="http://placeholder.qiniudn.com/428x220"></a></li>
+                        </ul>
+                     </div>
+                     <nav class="mod-indicator">
+                         <a href="#" class="active"></a>
+                         <a href="#"></a>
+                         <a href="#"></a>
+                     </nav>
+                    <script type="text/javascript" src="../js/zepto.js"></script>
+                    <script type="text/javascript" src="../js/swiper.min.js"></script>
+                    <script>
+                        var swiperMask = new Swiper('#slider', {
+                            pagination: '.mod-indicator',
+                            loop: true,
+                            slidesPerView: 2,
+                            centeredSlides: true,
+                            paginationClickable: true,
+                            spaceBetween: 8,
+                            //autoplay: 2500,
+                            grabCursor: true
+                        });
+                    </script>
+                 </div>
+            </div>
+            
+            <div class="mod-recommend-container near-play">
+                 <h2>最近在玩</h2>
+                 <div class="head">
+                     <ul class="mod-recommend-list clearfix new-servers">
+                         <li>
+                             <div class="icon-frame"><img src="http://placeholder.qiniudn.com/54x54" width="54" height="54" alt="全民英雄"></div>
+                             <div class="mod-recomend-content">
+                                 <h3>传奇霸业</h3>
+                                 <p>3个好友在玩</p>
+                                 <p class="orange">
+                                     <a href="#" class=""><i class="font-ico ico-packgae-thick"></i>礼包<em class="news">2</em></a>
+                                     <a href="#" class=""><i class="font-ico ico-discuss-thick"></i>论坛</a>
+                                 </p>
+                             </div>
+                             <a href="#" class="btn-common-s" style="text-align:right">打开</a>
+                         </li> 
+                     </ul>
+                 </div>
+                 <ul class="mod-software-list single-line clearfix">
+                     <li>
+                         <div class="box-inner">
+                             <div class="icon-frame"><img src="http://placeholder.qiniudn.com/54x54" width="54" height="54" alt="全民斩仙"><i class="ico-red-dot"></i></div>
+                             <h3>全民斩仙</h3>
+                         </div>
+                     </li>
+                      <li>
+                         <div class="box-inner">
+                             <div class="icon-frame"><img src="http://placeholder.qiniudn.com/54x54" width="54" height="54" alt="全民斩仙"><i class="ico-red-dot"></i></div>
+                             <h3>全民斩仙</h3>
+                         </div>
+                     </li> 
+                     <li>
+                         <div class="box-inner">
+                             <div class="icon-frame"><img src="http://pp.myapp.com/ma_icon/0/icon_10475565_18645906_1406276362/96" width="54" height="54" alt="召唤启示录"></div>
+                             <h3>召唤启示录</h3>
+                         </div>
+                     </li>
+                     <li>
+                         <div class="box-inner">
+                             <div class="icon-frame"><img src="http://pp.myapp.com/ma_icon/0/icon_1012592_18709936_1406883042/96" width="54" height="54" alt="进击的女神"></div>
+                             <h3>进击的女神</h3>
+                         </div>
+                     </li>
+                     <li>
+                         <div class="box-inner">
+                             <div class="icon-frame"><img src="http://pp.myapp.com/ma_icon/0/icon_10297682_18646350_1406287675/96" width="54" height="54" alt="全民英雄"></div>
+                             <h3>全民英雄</h3>
+                         </div>
+                     </li>
+                    <script>
+                    //动态计算间隙
+                    ;(function() {
+                        var ul = document.currentScript.parentNode,
+                            li = ul.getElementsByTagName('li'), 
+                            marginLeft = 0, 
+                            ulWidth = ul.offsetWidth,
+                            liWidth = li[0].offsetWidth,
+                            length = window.innerWidth > 359 ? li.length : li.length - 1;
+                            if(length < 4) {
+                                return;
+                            }
+                        marginLeft = Math.floor((ulWidth - liWidth * length) / (length - 1));
+                        for (var i = 1; i < li.length; i++) {
+                            li[i].style.marginLeft = marginLeft + 'px';
+                        };
+                        console.log(marginLeft);
+                    })();
+                </script>
+                 </ul>
+                
+            </div>
+            <div class="mod-recommend-container">
+                <p class="text-single-line">
+                    <a href="#">
+                        <img src="http://placeholder.qiniudn.com/16x16" alt="">【天天炫斗】新泳装上线，夏日大礼high翻天！
+                    </a>
+                </p>
+            </div>
+            <div class="mod-recommend-container">
+                <p class="text-single-line">
+                    <a href="#">
+                    <i class="font-ico ico-packgae-thick"></i>【天天炫斗】新泳装上线，夏日大礼high翻天！
+                    </a>
+                </p>
+            </div>   
+            <div class="mod-recommend-container">
+                <h2>游戏热榜TOP5</h2>
+                <ul class="mod-recommend-list clearfix new-servers hot-list">
+                     <li>
+                         <div class="icon-frame"><img src="http://placeholder.qiniudn.com/54x54" width="" height="" alt="全民英雄"></div>
+                         <div class="mod-recomend-content">
+                             <h3>1.传奇霸业<span class="new">上升最快</span></h3>
+                             <p>25425在玩</p>
+                             <p class="">8月29日开放下载</p>
+                         </div>
+                         <a href="#" class="btn-common-s">打开</a>
+                     </li> 
+                     <li>
+                         <div class="icon-frame"><img src="http://placeholder.qiniudn.com/54x54" width="" height="" alt="全民英雄"></div>
+                         <div class="mod-recomend-content">
+                             <h3>2.传奇霸业<span class="new push">推荐</span></h3>
+                             <p>25425在玩</p>
+                             <p class="">8月29日开放下载</p>
+                         </div>
+                         <a href="#" class="btn-common-s">下载</a>
+                     </li> 
+                     <li>
+                         <div class="icon-frame"><img src="http://placeholder.qiniudn.com/54x54" width="" height="" alt="全民英雄"></div>
+                         <div class="mod-recomend-content">
+                             <h3>3.传奇霸业</h3>
+                             <p>25425在玩</p>
+                             <p class="">8月29日开放下载</p>
+                         </div>
+                         <a href="#" class="btn-common-s">下载</a>
+                     </li>
+                 </ul>
+            </div>
+            <div class="mod-recommend-container">
+                <ul class="mod-recommend-list clearfix new-servers hot-list">
+                     <li>
+                         <div class="icon-frame"><img src="http://placeholder.qiniudn.com/54x54" width="" height="" alt="全民英雄"></div>
+                         <div class="mod-recomend-content">
+                            <h3>传奇霸业</h3>
+                            <p>25425 人在玩</p>
+                         </div>
+                         <a href="#" class="btn-common-s">打开</a>
+                     </li>
+                 </ul>
+                 <p class="text-bottom">Lisa、Timmmy、小虎子最近在玩 <time>1分钟前</time></p>
+            </div>
+            <div class="mod-recommend-container">
+                <h2>热门礼包</h2>
+                <ul class="mod-recommend-list clearfix new-servers hot-list">
+                     <li>
+                         <div class="icon-frame"><img src="http://placeholder.qiniudn.com/54x54" width="" height="" alt="全民英雄"></div>
+                         <div class="mod-recomend-content">
+                             <h3>天天星战</h3>
+                             <p>共<span class="red">5</span>种礼包</p>
+                             <p class="">宝石*2000、金币*888、彩石*200</p>
+                         </div>
+                     </li> 
+                     <li>
+                         <div class="icon-frame"><img src="http://placeholder.qiniudn.com/54x54" width="" height="" alt="全民英雄"></div>
+                         <div class="mod-recomend-content">
+                             <h3>天天星战</h3>
+                             <p>共<span class="red">5</span>种礼包</p>
+                             <p class="">宝石*2000、金币*888、彩石*200</p>
+                         </div>
+                     </li> 
+                     <li>
+                         <div class="icon-frame"><img src="http://placeholder.qiniudn.com/54x54" width="" height="" alt="全民英雄"></div>
+                         <div class="mod-recomend-content">
+                             <h3>天天星战</h3>
+                             <p>共<span class="red">5</span>种礼包</p>
+                             <p class="">宝石*2000、金币*888、彩石*200</p>
+                         </div>
+                     </li> 
+                 </ul>
+                 <!-- <div class="more">更多</div> -->
+                 <a class="btn-more" href="#">更多</a>
+            </div>
+            <div class="mod-recommend-container">
+                 <h2>新游推荐</h2>
+                 <div class="push-banner">
+                     <a href="#"><img src="http://placeholder.qiniudn.com/576x148" alt=""></a>
+                 </div>
+                 <ul class="mod-software-list single-line clearfix">
+                     <li>
+                         <div class="box-inner">
+                             <div class="icon-frame"><img src="http://placeholder.qiniudn.com/74x74" width="64" height="64" alt="全民斩仙"><i class="ico-red-dot"></i><div class="ico-best">本周最佳</div></div>
+                             <h3>全民斩仙</h3>
+                             <p>角色 82万下载</p>
+                             <a class="btn-common-s" href="#">下载</a>
+                         </div>
+                     </li> 
+                     <li>
+                         <div class="box-inner">
+                             <div class="icon-frame"><img src="http://pp.myapp.com/ma_icon/0/icon_10475565_18645906_1406276362/96" width="64" height="64" alt="召唤启示录"><div class="ico-best">本周最佳</div></div>
+                             <h3>召唤启示录</h3>
+                             <p>卡牌 79万下载</p>
+                             <a class="btn-common-s" href="#">下载</a>
+                         </div>
+                     </li>
+                     <li>
+                         <div class="box-inner">
+                             <div class="icon-frame"><img src="http://pp.myapp.com/ma_icon/0/icon_1012592_18709936_1406883042/96" width="64" height="64" alt="进击的女神"></div>
+                             <h3>进击的女神</h3>
+                             <p>卡牌 68万下载</p>
+                             <a class="btn-common-s" href="#">下载</a>
+                         </div>
+                     </li>
+                     <li>
+                         <div class="box-inner">
+                             <div class="icon-frame"><img src="http://pp.myapp.com/ma_icon/0/icon_10297682_18646350_1406287675/96" width="64" height="64" alt="全民英雄"></div>
+                             <h3>全民英雄</h3>
+                             <p>角色 82万下载</p>
+                             <a class="btn-common-s" href="#">下载</a>
+                         </div>
+                     </li>
+                 </ul>
+             </div>
+             <div class="mod-recommend-container">
+                 <h2>萌妹纸必玩的天天游戏</h2>
+                 <ul class="mod-software-list clearfix">
+                     <li>
+                         <div class="box-inner">
+                             <div class="icon-frame"><img src="http://pp.myapp.com/ma_icon/0/icon_10354929_18679039_1406797906/96" width="64" height="64" alt="全民斩仙"><i class="ico-red-dot"></i></div>
+                             <h3>全民斩仙</h3>
+                             <p>角色 82万下载</p>
+                             <a class="btn-common-s" href="#">下载</a>
+                         </div>
+                     </li> 
+                     <li>
+                         <div class="box-inner">
+                             <div class="icon-frame"><img src="http://pp.myapp.com/ma_icon/0/icon_10475565_18645906_1406276362/96" width="64" height="64" alt="召唤启示录"></div>
+                             <h3>召唤启示录</h3>
+                             <p>卡牌 79万下载</p>
+                             <a class="btn-common-s" href="#">下载</a>
+                         </div>
+                     </li>
+                     <li>
+                         <div class="box-inner">
+                             <div class="icon-frame"><img src="http://pp.myapp.com/ma_icon/0/icon_1012592_18709936_1406883042/96" width="64" height="64" alt="进击的女神"></div>
+                             <h3>进击的女神</h3>
+                             <p>卡牌 68万下载</p>
+                             <a class="btn-common-s" href="#">下载</a>
+                         </div>
+                     </li>
+                     <li>
+                         <div class="box-inner">
+                             <div class="icon-frame"><img src="http://pp.myapp.com/ma_icon/0/icon_10297682_18646350_1406287675/96" width="64" height="64" alt="全民英雄"></div>
+                             <h3>全民英雄</h3>
+                             <p>角色 82万下载</p>
+                             <a class="btn-common-s" href="#">下载</a>
+                         </div>
+                     </li> 
+                     <li>
+                         <div class="box-inner">
+                             <div class="icon-frame"><img src="http://pp.myapp.com/ma_icon/0/icon_10488980_18645744_1406276257/96" width="64" height="64" alt="天天酷跑"></div>
+                             <h3>天天酷跑</h3>
+                             <p>角色 92万下载</p>
+                             <a class="btn-common-s" href="#">下载</a>
+                         </div>
+                     </li>
+                     <li>
+                         <div class="box-inner">
+                             <div class="icon-frame"><img src="http://pp.myapp.com/ma_icon/0/icon_10580146_18710090_1406883366/96" width="64" height="64" alt="天天飞车"></div>
+                             <h3>天天飞车</h3>
+                             <p>角色 69万下载</p>
+                             <a class="btn-common-s" href="#">下载</a>
+                         </div>
+                     </li>
+                     <li>
+                         <div class="box-inner">
+                             <div class="icon-frame"><img src="http://pp.myapp.com/ma_icon/0/icon_10682309_18644185_1406199491/96" width="64" height="64" alt="天天酷跑"></div>
+                             <h3>天天酷跑</h3>
+                             <p>角色 92万下载</p>
+                             <a class="btn-common-s" href="#">下载</a>
+                         </div>
+                     </li>
+                     <li>
+                         <div class="box-inner">
+                             <div class="icon-frame"><img src="http://pp.myapp.com/ma_icon/0/icon_10213243_18646419_1406292302/96" width="64" height="64" alt="天天飞车"></div>
+                             <h3>天天飞车</h3>
+                             <p>角色 69万下载</p>
+                             <a class="btn-common-s" href="#">下载</a>
+                         </div>
+                     </li>
+                 </ul>
+             </div>
+                          <!--ad start-->
+             <ul class="mod-pic-show clearfix">
+                 <li><a href="#"><img src="http://placeholder.qiniudn.com/280x148"></a></li>
+                 <li><a href="#"><img src="http://placeholder.qiniudn.com/280x148"></a></li>
+             </ul>
+             <!--ad end-->
+              <div class="mod-recommend-container">
+                 <h2>让人欲罢不能的角色扮演</h2>
+                 <ul class="mod-software-list single-line clearfix">
+                     <li>
+                         <div class="box-inner">
+                             <div class="icon-frame"><img src="http://placeholder.qiniudn.com/74x74" width="64" height="64" alt="全民斩仙"><i class="ico-red-dot"></i></div>
+                             <h3>全民斩仙</h3>
+                             <p>角色 82万下载</p>
+                             <a class="btn-common-s" href="#">下载</a>
+                         </div>
+                     </li> 
+                     <li>
+                         <div class="box-inner">
+                             <div class="icon-frame"><img src="http://pp.myapp.com/ma_icon/0/icon_10475565_18645906_1406276362/96" width="64" height="64" alt="召唤启示录"></div>
+                             <h3>召唤启示录</h3>
+                             <p>卡牌 79万下载</p>
+                             <a class="btn-common-s" href="#">下载</a>
+                         </div>
+                     </li>
+                     <li>
+                         <div class="box-inner">
+                             <div class="icon-frame"><img src="http://pp.myapp.com/ma_icon/0/icon_1012592_18709936_1406883042/96" width="64" height="64" alt="进击的女神"></div>
+                             <h3>进击的女神</h3>
+                             <p>卡牌 68万下载</p>
+                             <a class="btn-common-s" href="#">下载</a>
+                         </div>
+                     </li>
+                     <li>
+                         <div class="box-inner">
+                             <div class="icon-frame"><img src="http://pp.myapp.com/ma_icon/0/icon_10297682_18646350_1406287675/96" width="64" height="64" alt="全民英雄"></div>
+                             <h3>全民英雄</h3>
+                             <p>角色 82万下载</p>
+                             <a class="btn-common-s" href="#">下载</a>
+                         </div>
+                     </li>
+                 </ul>
+             </div>
+
+             <div class="mod-recommend-container">
+                 <h2>精彩评论</h2>
+                 <ul class="mod-comment-list">
+                     <li>
+                         <div class="usr-face"><img src="http://placeholder.qiniudn.com/56x56"></div>
+                         <div class="content">
+                            <div class="top-bar">
+                                <p>
+                                    <span class="name">QQ浏览器用户</span>
+                                    <span class="fr">2小时前  来自 <a href="#">貂蝉有妖气</a></span>
+                                </p>
+                            </div>
+                            <div class="main">
+                                <p>光是这个媚俗的名称已经足够让人吐血三升了。光是这个媚俗的名称已经足够让人吐血三升了。光是这个媚俗的名称已经足够让人吐血三升了。光是这个媚俗的名称已经足够让人吐血三升了。光是这个媚俗的名称已经足够让人吐血三升了。光是这个媚俗的名称已经足够让人吐血三升了。</p>
+                            </div>
+                         </div>
+                     </li>
+                     <li>
+                         <div class="usr-face"><img src="http://placeholder.qiniudn.com/56x56"></div>
+                         <div class="content">
+                            <div class="top-bar">
+                                <p>
+                                    <span class="name">QQ浏览器用户</span>
+                                    <span class="fr">2小时前  来自 <a href="#">貂蝉有妖气</a></span>
+                                </p>
+                            </div>
+                            <div class="main">
+                                <p>光是这个媚俗的名称已经足够让人吐血三升了。</p>
+                            </div>
+                         </div>
+                     </li>
+                     <li>
+                         <div class="usr-face"><img src="http://placeholder.qiniudn.com/56x56"></div>
+                         <div class="content">
+                            <div class="top-bar">
+                                <p>
+                                    <span class="name">QQ浏览器用户</span><span class="fr">2小时前  来自 <a href="#">貂蝉有妖气</a></span>
+                                </p>
+                            </div>
+                            <div class="main">
+                                <p>光是这个媚俗的名称已经足够让人吐血三升了。</p>
+                            </div>
+                         </div>
+                     </li>
+                 </ul>
+                 <a class="btn-more" href="#">更多</a>
+             </div>
+            
+
+
+         </section> 
+         <!--content end-->
+
+         <a class="btn-back-top" href="#top"></a>
+         <footer class="mod-footer">Copyright &copy; 2014 Tencent. All rights reserved.</footer>  
+    </div>
+
+    <!--dialog start-->
+    <div class="mod-mask hidden"></div>
+    <section class="mod-dialog dialog-lettory hidden">
+        <h2 class="mod-dialog-header"><a class="btn-close" href="#"></a></h2>
+        <div class="mod-dialog-content"> 
+            <a class="dialog-btn-red" href="#">立即参与</a>      
+        </div>
+        <div class="mod-dialog-footer">
+            <input type="checkbox"><label>不再提示</label>
+        </div>
+    </section>
+    <!--dialog end-->
+
+
+</body>
+</html>
+  

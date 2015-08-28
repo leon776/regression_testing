@@ -35,7 +35,6 @@ var CssOperater = require('./js/css_operater'),
     FileOperater = require('./js/file_operater');
 //debug
 for(var module in global.require.cache){
-    console.log(module)
     if(global.require.cache.hasOwnProperty(module)){
         delete global.require.cache[module];
     }
@@ -100,7 +99,7 @@ showLog = function(id) {
         win.window.document.getElementById('log').value = global.data[id].data;
     });
 },
-showPic = function(name, dest) {
+showPic = function(name, dest, type) {
     var win = gui.Window.open('contrast_img.html', {
         position: 'center',
         width: 1280,
@@ -109,14 +108,17 @@ showPic = function(name, dest) {
     }), str = '';
     win.on('document-end', function () {
         win.window.document.getElementById('master').src = dest + '/.testData/imgMaster/' + name+ '.png';
-        win.window.document.getElementById('slave').src = dest + '/.testData/imgSlave/' + name+ '.png';
+        if(!type) {
+            win.window.document.getElementById('slave').src = dest + '/.testData/imgSlave/' + name+ '.png';
+        }
     });
 },
 showLogCss = function(id) {
     var win = gui.Window.open('log.html', {
         position: 'center',
         width: 800,
-        height: 600
+        height: 600,
+        toolbar: false
     }), str = '';
     win.on('document-end', function () {
         var _data = global.cssData[id].unique();
@@ -161,7 +163,6 @@ var App = (function() {
         $('#startTest').click(function() {
             self.startTest();
         });
-
         $('#laodTestData').click(function() {
             self.readFolder(self.dest);
         });
@@ -172,20 +173,20 @@ var App = (function() {
             self.getRepeatCssRule(this.value);
         });
         $('#startCssTest').click(function() {
-            if(self.cssPath) {
+            if(self.cssPath && self.htmlfile.length > 0) {
                 self.getUselessCss(self.cssPath);
                 self.getRepeatCssRule(self.cssPath);
             } else {
-                self.tip('清先上传css', 'error');
+                self.tip('缺少css文件或者html目录', 'error');
             }
         });
         $('#startCssRulesTest').click(function() {
-            if(self.cssPath) {
+            if(self.cssPath && self.htmlfile.length > 0) {
                 window.setTimeout(function() {
                     self.startCssRulesTest();
                 }, 500);
             } else {
-                self.tip('清先上传css', 'error');
+                self.tip('缺少css文件或者html目录', 'error');
             }
         });
         $('#clearUselessCss').click(function() {
@@ -201,11 +202,7 @@ var App = (function() {
             if(fileList.length === 0){return false;}
             $('#dest').val(fileList[0].path);
             self.dest = fileList[0].path;
-            if(!fs.existsSync(self.dest + '/.testdata/')) {
-                fs.mkdirSync(self.dest + '/.testdata');
-                fs.mkdirSync(self.dest + '/.testdata/imgMaster');
-                fs.mkdirSync(self.dest + '/.testdata/imgSlave');
-            }
+            _mkdir();
             self.htmlfile = [];
             self.loadTestData();
             self.readFolder(fileList[0].path);
@@ -213,15 +210,18 @@ var App = (function() {
         $('#filePathDialog').change(function() {
             $('#dest').val(this.value);
             self.dest = this.value;
+            _mkdir();
+            self.htmlfile = [];
+            self.loadTestData();
+            self.readFolder(this.value);
+        });
+        function _mkdir() {
             if(!fs.existsSync(self.dest + '/.testdata/')) {
                 fs.mkdirSync(self.dest + '/.testdata');
                 fs.mkdirSync(self.dest + '/.testdata/imgMaster');
                 fs.mkdirSync(self.dest + '/.testdata/imgSlave');
             }
-            self.htmlfile = [];
-            self.loadTestData();
-            self.readFolder(this.value);
-        });
+        }
     };
     //清理css功能start
     App.prototype.clearUselessCss = function(cssPath) {
@@ -346,7 +346,6 @@ var App = (function() {
         gruntFileData = gruntFileData.replace('!@@@!', cssPath.replace(/\\/g, '/'));
         fs.writeFileSync(gruntFilePath, gruntFileData, 'utf-8');
         for(var module in global.require.cache){
-            console.log(module)
             if(global.require.cache.hasOwnProperty(module)){
                 delete global.require.cache[module];
             }
@@ -361,8 +360,8 @@ var App = (function() {
             var tmp = testData[item];
             for(var j = 0; j < tmp.length; j++) {
                 msg.push({
-                    selectors: tmp[j].selectors.join('<br />'),
-                    declarations: tmp[j].declarations.join('<br />'),
+                    selectors: tmp[j].selectors.join(';<br />'),
+                    declarations: tmp[j].declarations.join(';<br />'),
                     count: tmp[j].count
                 });
             }
@@ -372,6 +371,8 @@ var App = (function() {
         $('#outPutMsg').html(renderCssRules({msg : msg}));
     };
     //清理css功能end
+
+    //回归测试开始
     App.prototype.createTestJson = function(fileSrc, callback) {
         if(this.htmlfile.length === 0) {
             this.tip('请先选择html目录', 'alert-error');
@@ -398,7 +399,7 @@ var App = (function() {
                         self.curPage++;
                     }
                     fs.writeFile(ver + '/' + _fileName + '.json', json, 'utf-8');
-                    self.createPrintscreen(frame.src, _fileName);
+                    self.createPrintscreen(frame.src, _fileName, $('#iframeWidth').val());
                     self._showProcess();
                     if(self.curPage == self.htmlfile.length || fileSrc) {
                         self.tip('版本生成成功', 'alert-success');
@@ -443,7 +444,7 @@ var App = (function() {
                             var nodes = frame.contentWindow.document.getElementsByTagName('*');
                             self.curPage++;
                             $('#outPutMsg').append(render({"msg" :
-                                self.contrastPage(nodes, testData, self.htmlfile[tmp].path, PhantomRender, self.dest, self.frame.src)
+                                self.contrastPage(nodes, testData, self.htmlfile[tmp].path, PhantomRender, self.dest, self.frame.src, $('#iframeWidth').val())
                                 })
                             );
                             self._showProcess();
@@ -461,9 +462,9 @@ var App = (function() {
             }
         }
     };
-    App.prototype.createPrintscreen = function(filePath, fileName) {
-       PhantomRender.render(filePath, fileName, this.dest + '/.testdata/imgMaster/', function() {
-            console.log(1)
+    App.prototype.createPrintscreen = function(filePath, fileName, w) {
+       PhantomRender.render(filePath, fileName, this.dest + '/.testdata/imgMaster/', [], w, function() {
+            //console.log(1)
        })
     };
     App.prototype.loadTestData = function() {
@@ -499,7 +500,9 @@ var App = (function() {
                 msg.push({
                     "txt": '读取' + path.basename(file) + '成功',
                     "type": type,
-                    "id": file.replace(/\\/g, '\\\\')
+                    "id": file.replace(/\\/g, '\\\\'),
+                    "fileName": path.basename(file),
+                    dest: this.dest.replace(/\\/g, '/')
                 });
             }
         }
@@ -518,15 +521,9 @@ var App = (function() {
         preventDefault();
         this.dragBox = $('#' + this.option.dragBox);
         this.dest = $('#dest').val();
-        if(!fs.existsSync(this.dest + '/.testdata/')) {
-            fs.mkdirSync(this.dest + '/.testdata');
-        }
-
-
-
         this.bindEvent();
         this.loadTestData();
-        this.readFolder(this.dest);
+        //this.readFolder(this.dest);
     };
     return App;
 })();
